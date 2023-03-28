@@ -1,0 +1,27 @@
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="title_container">
+            <h2>LogIn</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+                <form>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" placeholder="UserName" required
+                            [(ngModel)]="logInModel.userName" />
+                    </div>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="password" name="password" placeholder="Password" required
+                            [(ngModel)]="logInModel.password" />
+                    </div>
+                    <div class="input_field checkbox_option">
+                        <input type="checkbox" id="cb2">
+                        <label for="cb2">I want to receive the newsletter</label>
+                        <a [routerLink]="['/register-user']">Create Account</a>
+                    </div>
+                    <input class="button" type="submit" (click)="LogIn()" value="LogIn" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
