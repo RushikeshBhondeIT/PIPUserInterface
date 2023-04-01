@@ -1,0 +1,5 @@
+{
+    "angular.disableAutomaticNgcc": true,
+    "github-enterprise.uri": "https://github.com/RushikeshBhondeIT/PIPUserInterface.git",
+    "git.verboseCommit": false
+}
