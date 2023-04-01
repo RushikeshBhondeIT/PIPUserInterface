@@ -26,8 +26,8 @@ export class LocalStorageService {
   setItem(key: string, value: any) {
     localStorage.setItem(key, value);
   }
-  getItem(key:string) {
-    localStorage.getItem(key);
+  getItem(key: string) {
+    return localStorage.getItem(key);
   }
 
   public saveToken(token: string, expiration: string): void {
@@ -58,17 +58,23 @@ export class LocalStorageService {
   public isLoggedIn(): boolean {
     this.token = localStorage.getItem('token');
     var newvalue;
-    if (this.token != null && this.token !== '') {
+    if (this.token != null && this.token != '') {
       const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
       newvalue = expiry * 1000 > Date.now();
-      if (newvalue) {
-        return false
-      } else {
-        return true;
+      if (newvalue != null) {
+        return true
       }
-    } else {
+      else {
+        return false;
+      }
+    }
+    if (JSON.parse(this.token) == 'null' ||JSON.parse(this.token)=='Undefined' ) {
       this.autologout(this.tokenExpirationTimer);
-      return true;
+      return false;
+    }
+    else {
+      this.autologout(this.tokenExpirationTimer);
+      return false;
     }
   }
 

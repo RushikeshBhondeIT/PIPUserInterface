@@ -24,13 +24,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.employeeObject=this.localStorage.getItem('employee');
-    // this.employeeSharedService.getEmployeeResponce.subscribe(res => {
-    //   if(res){
-    //     this.employeeObject = res;
-    //     alert("res "+ this.employeeObject.employeeName+this.employeeObject.employeeId);
-    //   }
-    // });
     this.employeeObject.employeeId = this.route.snapshot.queryParamMap.get("employeeId"); //Read Query String value
     this.employeeObject.employeeName = this.route.snapshot.queryParamMap.get("employeeName");
     this.employeeObject.gender = this.route.snapshot.queryParamMap.get("gender");
@@ -61,6 +54,7 @@ export class EditEmployeeComponent implements OnInit {
 
   EditUserfunction() {
     this.empService.EditEmployeeApiCall(this.employeeObject).subscribe(res => {
+     
       if (res != null) {
         this.employeeObject = res;
         this.showSuccessMessage('Edited Successfully!',
@@ -77,10 +71,8 @@ export class EditEmployeeComponent implements OnInit {
           true,)
       }
     });
-
-
-
   }
+
   showSuccessMessage(
     title, message, icon = null,
     showCancelButton = true) {
@@ -105,8 +97,5 @@ export class EditEmployeeComponent implements OnInit {
   EditUser() {
 
   }
-}
-function showSuccessMessage(title: any, message: any, arg2: null, arg3: boolean) {
-  throw new Error('Function not implemented.');
 }
 

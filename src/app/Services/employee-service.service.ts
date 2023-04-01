@@ -39,7 +39,7 @@ export class EmployeeServiceService {
 
   DeleteEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
     alert("GetAllEmployeeApiCall service called");
-    return this.http.post<any>("https://localhost:7115/Edit",employeeAddRequest);
+    return this.http.post<any>("https://localhost:7115/Delete",employeeAddRequest);
   }
  
 

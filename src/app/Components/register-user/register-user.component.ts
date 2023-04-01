@@ -99,6 +99,7 @@ export class RegisterUserComponent implements OnInit {
       showCancelButton: showCancelButton
     })
   }
+  
   confirmEmail() {
     alert("confirm event clicked");
     this.empService.confirmEmail(this.confirmEmailModel).subscribe(res => {

@@ -1,27 +1,58 @@
-<div class="form_wrapper">
-    <div class="form_container">
-        <div class="title_container">
-            <h2>LogIn</h2>
-        </div>
-        <div class="row clearfix">
-            <div class="">
-                <form>
-                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                        <input type="email" name="email" placeholder="UserName" required
-                            [(ngModel)]="logInModel.userName" />
+<h1 class="title">Welcome to User Login</h1>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://www.insperity.com/wp-content/uploads/Employee_development_1200x630.png"
+                    class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style="margin-right:100px;">
+                <form name="form" (ngSubmit)="f.form.valid && LogIn()" #f="ngForm">
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
+                            placeholder="Enter a valid User Name" [(ngModel)]="logInModel.userName" #email="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required />
+                        <label class="form-label" for="form3Example3">User Name</label>
+                        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                            <div *ngIf="email.errors['required']">UserName is required</div>
+                            <div *ngIf="email.errors['pattern']">Enter Valied UserName address</div>
+                        </div>
                     </div>
-                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input type="password" name="password" placeholder="Password" required
-                            [(ngModel)]="logInModel.password" />
+
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+                            placeholder="Enter password" [(ngModel)]="logInModel.password" #password="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required
+                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*_]).{6,20}$" />
+                        <label class="form-label" for="form3Example4">Password</label>
+                        <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+                            <div *ngIf="password.errors['required']">Password is required</div>
+                            <div *ngIf="password.errors['pattern']">Enter Valied Password </div>
+                        </div>
                     </div>
-                    <div class="input_field checkbox_option">
-                        <input type="checkbox" id="cb2">
-                        <label for="cb2">I want to receive the newsletter</label>
-                        <a [routerLink]="['/register-user']">Create Account</a>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p style="color:red">{{errmsg}}</p>
                     </div>
-                    <input class="button" type="submit" (click)="LogIn()" value="LogIn" />
+
+                    <p class="small fw-bold mt-2 pt-1 mb-0">
+                        <a [routerLink]="['/forgot-password']" class="link-danger" style="font-size: medium;">Forgot
+                            Password?</a>
+                    </p>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                            style="padding-left: 2.5rem; padding-right: 2.5rem; width: 200px;">Login</button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+                            <a [routerLink]="['/register-user']" class="link-danger">Register</a>
+                        </p>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
-</div>
+</section>>

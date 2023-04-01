@@ -13,6 +13,7 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { DataTablesModule } from 'angular-datatables';
 import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.component';
 import { CreateEmployeeComponent } from './Components/create-employee/create-employee.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CreateEmployeeComponent } from './Components/create-employee/create-emp
     DashboardComponent,
     EditEmployeeComponent,
     CreateEmployeeComponent,
+    ForgotPasswordComponent,
     
   ],
   imports: [

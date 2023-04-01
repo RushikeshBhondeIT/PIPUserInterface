@@ -35,9 +35,7 @@ export class AccountsControllerService {
   logInApiCall(logInModel: LogInModel): Observable<any> {
     alert("confirm service called");
     return this.http.post<any>("https://localhost:7115/LogIn", logInModel);
-
   }
-
 
   TFAlogInApiCall(twoFactorAuth: TwoFactorAuth): Observable<any> {
     alert("confirm service called");

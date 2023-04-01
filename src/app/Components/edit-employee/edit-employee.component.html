@@ -1,50 +1,113 @@
+<section class="vh-100" >
+  <div class="container" style="margin-top: -50px;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <!-- <div class="card text-black" style="border-radius: 25px;"> -->
+          <div class="container" >
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-<div class="form_wrapper" style="margin-top: 60px;">
-    <div class="form_container">
-      <div class="title_container">
-        <h2> Edit Account </h2>
-      </div>
-      <div class="row clearfix">
-        <div class="">
-          <form>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <input type="text" name="id"  required [(ngModel)]="employeeObject.employeeId" hidden />
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Profile</p>
+
+                <form class="mx-1 mx-md-4" name="form" (ngSubmit)="f.form.valid && EditUserfunction()" #f="ngForm">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0"> 
+                      <input type="text" id="form3Example1c" name="employeeId" class="form-control" hidden placeholder="Employee Id" [(ngModel)]="employeeObject.employeeId" #employeeId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && employeeId.invalid }" required  />
+                      <div *ngIf="f.submitted && employeeId.errors" class="invalid-feedback">
+                        <div *ngIf="employeeId.errors['required']">Employee Name is required</div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" name="employeeName" class="form-control" placeholder="Employee Name" [(ngModel)]="employeeObject.employeeName" #employeeName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && employeeName.invalid }" required  />
+                      <div *ngIf="f.submitted && employeeName.errors" class="invalid-feedback">
+                        <div *ngIf="employeeName.errors['required']">Employee Name is required</div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example1c" name="email" class="form-control" placeholder="Email" [(ngModel)]="employeeObject.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required  />
+                        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                          <div *ngIf="email.errors['required']">Email is required</div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="date" id="form3Example1c" name="dob" class="form-control"  placeholder="Date Of Birth" [(ngModel)]="employeeObject.dateOfBirth" #dateOfBirth="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dateOfBirth.invalid }" required  />
+                        <div *ngIf="f.submitted && dateOfBirth.errors" class="invalid-feedback">
+                          <div *ngIf="dateOfBirth.errors['required']">Age is required</div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" name="gender" class="form-control" placeholder="Gender" [(ngModel)]="employeeObject.gender" #gender="ngModel" [ngClass]="{ 'is-invalid': f.submitted && gender.invalid }" required  />
+                        <div *ngIf="f.submitted && gender.errors" class="invalid-feedback">
+                          <div *ngIf="gender.errors['required']">Gender Type is required</div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" name="countryName" class="form-control" placeholder="Country Name" [(ngModel)]="employeeObject.countryName" #countryName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && countryName.invalid }" required  />
+                        <div *ngIf="f.submitted && countryName.errors" class="invalid-feedback">
+                          <div *ngIf="countryName.errors['required']">Country Name is required</div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" name="address" class="form-control" placeholder="Address" [(ngModel)]="employeeObject.address" #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" required  />
+                        <div *ngIf="f.submitted && address.errors" class="invalid-feedback">
+                          <div *ngIf="address.errors['required']">Address is required</div>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                          <select #teams (change)="NewsLetterSelected(teams.value)" style="width:390px;height: 35px;">
+                            <option>true</option>
+                            <option>false</option>
+                          </select>
+                        </div>
+                    </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" >Edit Employee Profile</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://blog.vantagecircle.com/content/images/size/w1000/2021/01/Employee-Management-Meaning-Importance-Tips-Tools---More.png"
+                  class="img-fluid" alt="Sample image" style="width: 700px;height: 400px; margin-top: 50px;">
+
+              </div>
             </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-              <input type="text" name="name"  required [(ngModel)]="employeeObject.employeeName" />
-            </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-              <input type="email" name="email"  required [(ngModel)]="employeeObject.email" />
-            </div>
-            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                <input type="text" name="date" required [(ngModel)]="employeeObject.dateOfBirth" />
-              </div>
-              <div class="input_field select_option">
-                <select #teams1 (change)="onSelected(teams1.value)">
-                  <option>{{employeeObject.gender}}</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-                <div class="select_arrow"></div>
-              </div>
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                <input type="text" name="countryName"  required [(ngModel)]="employeeObject.countryName" />
-              </div>
-              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                <input type="text" name="address"  required [(ngModel)]="employeeObject.address" />
-              </div>
-              <div class="input_field select_option">
-                <select #teams (change)="NewsLetterSelected(teams.value)">
-                  <option>{{employeeObject.receiveNewsLetters}}</option>
-                  <option>true</option>
-                  <option>false</option>
-                </select>
-                <div class="select_arrow"></div>
-              </div>
-            <input class="button" type="submit" (click)="EditUserfunction()" value="Edit" />
-          </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+</section>

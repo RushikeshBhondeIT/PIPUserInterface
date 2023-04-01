@@ -5,6 +5,7 @@ import { RegisterUser } from '../Models/register-user.model';
 import { AddCountry } from '../Models/add-country';
 import { EmployeeAddRequest } from '../Models/employee-add-request';
 import { EmployeeResponse } from '../Models/employee-response';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,26 @@ export class ServerInformationService {
     alert("AddCountryApiCall service called");
     return this.http.get<any>("https://localhost:7010/LeapYearsDay?startDate="+startYear+"&endDate="+endYear);
   }
+  showErrorMessage(
+    title, message, icon = null,
+    showCancelButton = true) {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'error',
+      showCancelButton: showCancelButton
+    })
+  }
 
+  showSuccessMessage(
+    title, message, icon = null,
+    showCancelButton = true) {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: icon,
+      showCancelButton: showCancelButton
+    })
+  }
 
 }

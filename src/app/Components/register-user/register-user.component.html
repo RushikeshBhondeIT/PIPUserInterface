@@ -1,4 +1,4 @@
-<div class="form_wrapper" style="margin-top: 60px;">
+<!-- <div class="form_wrapper" style="margin-top: 60px;">
   <div class="form_container">
     <div class="title_container">
       <h2> Create Account </h2>
@@ -37,4 +37,119 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+
+<section class="vh-100">
+  <div class="container" style="margin-top: -50px;">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <!-- <div class="card text-black" style="border-radius: 25px;"> -->
+        <div class="container">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">User Registration</p>
+
+                <form class="mx-1 mx-md-4" name="form" (ngSubmit)="f.form.valid && registerUser()" #f="ngForm">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select #teams (change)="onSelected(teams.value)" style="width:390px;height: 35px;">
+                        <option>Role</option>
+                        <option>Admin</option>
+                        <option>HR</option>
+                        <option>User</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" name="name" class="form-control" placeholder="Name"
+                        [(ngModel)]="userRegister.employeeName" #name="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required />
+                      <!-- <label class="form-label" for="form3Example1c">Your Name</label> -->
+                      <div *ngIf="f.submitted && name.errors" class="invalid-feedback">
+                        <div *ngIf="name.errors['required']">Name is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" name="email" class="form-control"
+                        placeholder="Your Email Id" [(ngModel)]="userRegister.email" #email="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                      <!-- <label class="form-label" for="form3Example3c">Your Email</label> -->
+                      <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                        <div *ngIf="email.errors['required']">Email is required</div>
+                        <div *ngIf="email.errors['pattern']">Enter Valied Email address</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example3c" name="mobile" class="form-control"
+                        placeholder="Your Mobile number" [(ngModel)]="userRegister.phone" #mobile="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" required pattern="^[0-9]{10}$" />
+                      <!-- <label class="form-label" for="form3Example3c">Your Email</label> -->
+                      <div *ngIf="f.submitted && mobile.errors" class="invalid-feedback">
+                        <div *ngIf="mobile.errors['required']">Mobile number is required</div>
+                        <div *ngIf="mobile.errors['pattern']">Enter Valied Mobile number</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" name="password" class="form-control"
+                        placeholder="Password" [(ngModel)]="userRegister.password" #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*_]).{6,20}$" />
+                      <!-- <label class="form-label" for="form3Example4c">Password</label> -->
+                      <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+                        <div *ngIf="password.errors['required']">Password is required</div>
+                        <div *ngIf="password.errors['pattern']">Enter Valied Password </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c"
+                      style="margin-right:275px ;" />
+
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

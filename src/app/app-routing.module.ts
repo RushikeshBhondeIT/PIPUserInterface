@@ -6,6 +6,7 @@ import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.
 import { LogInComponent } from './Components/log-in/log-in.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component'; 
 import { TwoFactorAuthenticationComponent } from './Components/two-factor-authentication/two-factor-authentication.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {path:'log-in',component:LogInComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'dashboard',component:DashboardComponent},
   {path:'edit-employee',component:EditEmployeeComponent},
   {path:'create-employee',component:CreateEmployeeComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'', redirectTo:'/log-in',pathMatch:'full'}
   
 ];
