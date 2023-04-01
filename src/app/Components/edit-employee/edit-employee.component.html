@@ -1,0 +1,50 @@
+
+<div class="form_wrapper" style="margin-top: 60px;">
+    <div class="form_container">
+      <div class="title_container">
+        <h2> Edit Account </h2>
+      </div>
+      <div class="row clearfix">
+        <div class="">
+          <form>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <input type="text" name="id"  required [(ngModel)]="employeeObject.employeeId" hidden />
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+              <input type="text" name="name"  required [(ngModel)]="employeeObject.employeeName" />
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+              <input type="email" name="email"  required [(ngModel)]="employeeObject.email" />
+            </div>
+            <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                <input type="text" name="date" required [(ngModel)]="employeeObject.dateOfBirth" />
+              </div>
+              <div class="input_field select_option">
+                <select #teams1 (change)="onSelected(teams1.value)">
+                  <option>{{employeeObject.gender}}</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+                <div class="select_arrow"></div>
+              </div>
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                <input type="text" name="countryName"  required [(ngModel)]="employeeObject.countryName" />
+              </div>
+              <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                <input type="text" name="address"  required [(ngModel)]="employeeObject.address" />
+              </div>
+              <div class="input_field select_option">
+                <select #teams (change)="NewsLetterSelected(teams.value)">
+                  <option>{{employeeObject.receiveNewsLetters}}</option>
+                  <option>true</option>
+                  <option>false</option>
+                </select>
+                <div class="select_arrow"></div>
+              </div>
+            <input class="button" type="submit" (click)="EditUserfunction()" value="Edit" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

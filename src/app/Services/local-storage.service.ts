@@ -23,7 +23,12 @@ export class LocalStorageService {
 
   }
 
-
+  setItem(key: string, value: any) {
+    localStorage.setItem(key, value);
+  }
+  getItem(key:string) {
+    localStorage.getItem(key);
+  }
 
   public saveToken(token: string, expiration: string): void {
     this.token = token;
@@ -55,18 +60,14 @@ export class LocalStorageService {
     var newvalue;
     if (this.token != null && this.token !== '') {
       const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
-      alert("1st:" + expiry);
       newvalue = expiry * 1000 > Date.now();
       if (newvalue) {
-        alert("making a request" + newvalue);
         return false
       } else {
-        alert("Navigate  to login" + newvalue);
         return true;
       }
     } else {
       this.autologout(this.tokenExpirationTimer);
-      alert("NAVIGATE to login" + newvalue);
       return true;
     }
   }

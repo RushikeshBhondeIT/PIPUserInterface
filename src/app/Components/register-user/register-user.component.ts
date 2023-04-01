@@ -24,7 +24,7 @@ export class RegisterUserComponent implements OnInit {
   logInModel: LogInModel = new LogInModel();
   tfaAuth: TwoFactorAuth = new TwoFactorAuth();
   changePassword: ChangePassword = new ChangePassword();
-  role: string = "Admin";
+  selectedTeam : string = "";
   status: string = "";
   message: string = "";
   token: string = "";
@@ -40,16 +40,16 @@ export class RegisterUserComponent implements OnInit {
     //call message method and pass it the parameters on page load
    
   }
-  GetAllEmployee() {
-    if (this.localStorage.isLoggedIn() == false) {
-      this.empService.GetAllEmployeeApiCall().subscribe(res => {
-        if (res != null || res.status == "Success") {
-          this.status = res.status;
-          this.message = res.message;
-        }
-      });
-    }
-  }
+  // GetAllEmployee() {
+  //   if (this.localStorage.isLoggedIn() == false) {
+  //     this.empService.GetAllEmployeeApiCall().subscribe(res => {
+  //       if (res != null || res.status == "Success") {
+  //         this.status = res.status;
+  //         this.message = res.message;
+  //       }
+  //     });
+  //   }
+  // }
   showSuccessMessage(
     title, message, icon = null,
     showCancelButton = true){
@@ -59,9 +59,11 @@ export class RegisterUserComponent implements OnInit {
       icon: icon,
       showCancelButton: showCancelButton
     })}
+    
+  
 
   registerUser() {
-    this.empService.registerUser(this.userRegister, this.role).subscribe(res => {
+    this.empService.registerUser(this.userRegister, this.selectedTeam).subscribe(res => {
       if (res != null) {
         this.status = res.status;
         this.message = res.message;
@@ -69,11 +71,34 @@ export class RegisterUserComponent implements OnInit {
         this.message,
         'success',
         true,)
+        this.route.navigateByUrl('/log-in');
       }
-      this.route.navigateByUrl('/log-in');
+      else{
+        this.message = res.message;
+        this.showErrorMessage('Error',
+        this.message,
+        'success',
+        true,)
+      }
+     
     });
   }
 
+
+	onSelected(value:string): void {
+		this.selectedTeam = value;
+	}
+
+  showErrorMessage(
+    title, message, icon = null,
+    showCancelButton = true) {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'error',
+      showCancelButton: showCancelButton
+    })
+  }
   confirmEmail() {
     alert("confirm event clicked");
     this.empService.confirmEmail(this.confirmEmailModel).subscribe(res => {

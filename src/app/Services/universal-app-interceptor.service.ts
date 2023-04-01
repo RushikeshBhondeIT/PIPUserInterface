@@ -11,7 +11,6 @@ export class UniversalAppInterceptorService implements HttpInterceptor {
     authService.loadToken();
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    alert("Token loded in interceptior");
     const token = this.authService.getToken();
     req = req.clone({
       url: req.url,

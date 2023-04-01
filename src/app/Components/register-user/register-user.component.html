@@ -1,4 +1,4 @@
-<div class="form_wrapper">
+<div class="form_wrapper" style="margin-top: 60px;">
   <div class="form_container">
     <div class="title_container">
       <h2> Create Account </h2>
@@ -6,17 +6,27 @@
     <div class="row clearfix">
       <div class="">
         <form>
-          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-            <input type="email" name="email" placeholder="User Name" required  [(ngModel)]="userRegister.employeeName"/>
+          <div class="input_field select_option">
+            <select #teams (change)="onSelected(teams.value)">
+              <option>Role</option>
+              <option>Admin</option>
+              <option>HR</option>
+              <option>User</option>
+            </select>
+            <div class="select_arrow"></div>
           </div>
           <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-            <input type="email" name="email" placeholder="Email" required  [(ngModel)]="userRegister.email"/>
+            <input type="email" name="email" placeholder="User Name" required [(ngModel)]="userRegister.employeeName" />
+          </div>
+          <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+            <input type="email" name="email" placeholder="Email" required [(ngModel)]="userRegister.email" />
           </div>
           <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
             <input type="text" name="Phone" placeholder="Phone Number" required [(ngModel)]="userRegister.phone" />
           </div>
           <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-            <input type="password" name="password" placeholder="Password" required [(ngModel)]="userRegister.password" />
+            <input type="password" name="password" placeholder="Password" required
+              [(ngModel)]="userRegister.password" />
           </div>
           <div class="input_field checkbox_option">
             <input type="checkbox" id="cb1">

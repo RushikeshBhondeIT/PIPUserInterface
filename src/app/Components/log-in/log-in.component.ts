@@ -14,30 +14,48 @@ export class LogInComponent {
 
   logInModel: LogInModel = new LogInModel();
   message: string = ""
-  status:string=""
-  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService,private route:Router) {
+  status: string = ""
+  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService, private route: Router) {
   }
 
 
   LogIn() {
-    alert("Login event clicked");
     this.empService.logInApiCall(this.logInModel).subscribe(res => {
       if (res != null || res.status == "Success") {
-        alert("Logged in successfully" + " " + res.message);
         this.localStorage.saveToken(res.token, res.expration);
         this.localStorage.loadToken();
         this.status = res.status;
         this.message = res.message;
-        this.showSuccessMessage('SweetAlert Success',
-        this.message,
-        'success',
-        true,)
+        this.showSuccessMessage('Success',
+          this.message,
+          'success',
+          true,)
+        alert("Login event clicked");
+        this.route.navigateByUrl('dashboard');
       }
-      this.route.navigateByUrl('/two-factor-auth');
+      else {
+        this.message = res.message;
+        this.showErrorMessage('Error',
+          this.message,
+          'success',
+          true,)
+      }
+
     });
   }
 
 
+
+  showErrorMessage(
+    title, message, icon = null,
+    showCancelButton = true) {
+    return Swal.fire({
+      title: title,
+      text: message,
+      icon: 'error',
+      showCancelButton: showCancelButton
+    })
+  }
 
   showSuccessMessage(
     title, message, icon = null,

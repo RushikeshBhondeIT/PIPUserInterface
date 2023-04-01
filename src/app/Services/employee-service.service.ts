@@ -24,7 +24,6 @@ export class EmployeeServiceService {
   }
 
   GetAllEmployeeApiCall(): Observable<any> {
-    alert("GetAllEmployeeApiCall service called");
     return this.http.get<any>("https://localhost:7115/GetAllEmployees");
   }
 
@@ -33,8 +32,9 @@ export class EmployeeServiceService {
     return this.http.post<any>("https://localhost:7115/Create",employeeAddRequest);
   }
   EditEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
-    alert("GetAllEmployeeApiCall service called");
-    return this.http.post<any>("https://localhost:7115/Edit",employeeAddRequest);
+    alert("EditEmployeeApiCall service called");
+    alert(employeeAddRequest);
+    return this.http.put<any>("https://localhost:7115/Edit",employeeAddRequest);
   }
 
   DeleteEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {

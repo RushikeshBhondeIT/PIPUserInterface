@@ -61,10 +61,10 @@ export class AccountsControllerService {
   }
 
 
-  GetAllEmployeeApiCall(): Observable<any> {
-    alert("GetAllEmployeeApiCall service called");
-    return this.http.get<any>("https://localhost:7115/GetAllEmployees");
-  }
+  // GetAllEmployeeApiCall(): Observable<any> {
+  //   alert("GetAllEmployeeApiCall service called");
+  //   return this.http.get<any>("https://localhost:7115/GetAllEmployees");
+  // }
 
   AddCountryApiCall(countryName:AddCountry): Observable<any> {
     alert("AddCountryApiCall service called");

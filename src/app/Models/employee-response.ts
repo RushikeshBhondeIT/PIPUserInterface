@@ -1,14 +1,14 @@
 export class EmployeeResponse {
     employeeId:string;
-    EmployeeName:string;
-    Email:string;
-    DateOfBirth:Date;
-    Gender:string;
-    CountryId:string;
-    CountryName:string;
-    Address:string;
-    ReceiveNewsLetters:boolean;
-    Age:string;
+    employeeName:string;
+    email:string;
+    dateOfBirth:Date;
+    gender:string;
+    countryId:string;
+    countryName:string;
+    address:string;
+    receiveNewsLetters:boolean;
+    age:string;
 
     
 }

@@ -1,0 +1,6 @@
+body {
+	margin: 2em;
+}
+td:last-child {
+	text-align: center;
+}
