@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { CreateEmployeeComponent } from './Components/create-employee/create-employee.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.component';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { LogInComponent } from './Components/log-in/log-in.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component'; 
 import { TwoFactorAuthenticationComponent } from './Components/two-factor-authentication/two-factor-authentication.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {path:'log-in',component:LogInComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'edit-employee',component:EditEmployeeComponent},
   {path:'create-employee',component:CreateEmployeeComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'change-password',component:ChangePasswordComponent},
   {path:'', redirectTo:'/log-in',pathMatch:'full'}
   
 ];

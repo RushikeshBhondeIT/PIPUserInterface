@@ -8,29 +8,61 @@ import { ServerInformationService } from 'src/app/Services/server-information.se
 import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
 import Swal from 'sweetalert2';
 import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
+import { DatePipe } from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
 
   Employees: EmployeeResponse[] = [];
   message: string = ""
   status: string = ""
+  searchItem: Date;
   employeeResponseObject: EmployeeResponse;
+  
+
   // employeeObject: EmployeeResponse = new EmployeeResponse();
   // dtoptions: DataTables.Settings = {}
   // dtTrigger: Subject<any> = new Subject()
   constructor(private empService: EmployeeServiceService,
     private localStorage: LocalStorageService,
     private router: Router,
-    private serverInfo: ServerInformationService) {
+    private serverInfo: ServerInformationService,
+    public datepipe: DatePipe) {
   }
+  displayedColumns: string[] = ['employeeId', 'employeeName', 'email', 'dateOfBirth','gender','countryName','address','NewsLetters','age'];
 
   ngOnInit() {
     this.GetAllEmployee();
+    this.Employees = this.GetAllEmployee();
+  }
+ 
+
+
+
+  changeDate() {
+
+  }
+  GetDay() {
+    var someDateVar = this.datepipe.transform(this.searchItem, 'MM-dd-YYYY');
+    this.serverInfo.GetDayTimeApiCall(someDateVar).subscribe(res => {
+      if (res != null) {
+        this.message = res.message;
+      }
+    }, e => {
+      this.serverInfo.showErrorMessage('Error',
+        'DateTime is null !',
+        'error',
+        true,)
+      this.router.navigateByUrl('/dashboard');
+    });
   }
 
   GetAllEmployee() {
@@ -45,6 +77,7 @@ export class DashboardComponent implements OnInit {
       });
       //alert("GetAll employee excecuted");
     }
+    return this.Employees;
   }
 
   CreateEmployee() {
@@ -70,13 +103,13 @@ export class DashboardComponent implements OnInit {
             true,)
           this.router.navigateByUrl('/dashboard');
         }
-        else {
-          this.serverInfo.showErrorMessage('Error',
-            this.message,
-            'success',
-            true,)
-        }
-      })
+      }, e => {
+        this.serverInfo.showErrorMessage('Error',
+          e.error.message,
+          'error',
+          true,)
+        this.router.navigateByUrl('/dashboard');
+      });
     }
   }
 

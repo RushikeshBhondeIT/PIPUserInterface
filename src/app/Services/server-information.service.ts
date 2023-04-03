@@ -16,20 +16,16 @@ export class ServerInformationService {
   constructor(private http: HttpClient) {
   }
   GetServerTimeApiCall(): Observable<any> {
-    alert("AddCountryApiCall service called");
     return this.http.get<any>("https://localhost:7115/GetServerTime");
   }
   GetDayTimeApiCall(dateTime:string): Observable<any> {
-    alert("AddCountryApiCall service called");
-    return this.http.get<any>("https://localhost:7115/GetDay"+dateTime);
+    return this.http.get<any>("https://localhost:7115/GetDay?dateTime="+dateTime);
   }
 
   GetLeapYearsTimeApiCall(startYear:number,endYear:number): Observable<any> {
-    alert("AddCountryApiCall service called");
     return this.http.get<any>("https://localhost:7010/LeapYears?StartYear="+startYear+"&EndYear="+endYear);
   }
   GetLeapYearsDayTimeApiCall(startYear:Date,endYear:Date): Observable<any> {
-    alert("AddCountryApiCall service called");
     return this.http.get<any>("https://localhost:7010/LeapYearsDay?startDate="+startYear+"&endDate="+endYear);
   }
   showErrorMessage(

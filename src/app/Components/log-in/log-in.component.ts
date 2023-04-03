@@ -17,7 +17,7 @@ export class LogInComponent {
   message: string = ""
   status: string = ""
   errmsg: string;
-  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService, private route: Router,private serverInfo:ServerInformationService) {
+  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService, private route: Router, private serverInfo: ServerInformationService) {
   }
 
   LogIn() {
@@ -34,12 +34,12 @@ export class LogInComponent {
           true,)
         this.route.navigateByUrl('dashboard');
       }
-    });
-    this.message = 'Please enter Valid userName And Password';
-    this.serverInfo.showErrorMessage('Error',
-      this.message,
+    },e =>{
+      this.serverInfo.showErrorMessage('Error',
+      e.error.message,
       'error',
-      true)
+      true,)
+    });
     this.route.navigateByUrl('/log-in');
   }
 

@@ -9,6 +9,7 @@ import { RegisterUser } from 'src/app/Models/register-user.model';
 import { TwoFactorAuth } from 'src/app/Models/two-factor-auth';
 import { AccountsControllerService } from 'src/app/Services/accounts-controller.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
+import { ServerInformationService } from 'src/app/Services/server-information.service';
 import Swal from 'sweetalert2';
 
 
@@ -34,7 +35,10 @@ export class RegisterUserComponent implements OnInit {
   addCountries: AddCountry = new AddCountry();
   countryRespose: CountryResponse = new CountryResponse();
 
-  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService,private route:Router) {
+  constructor(private empService: AccountsControllerService, 
+    private localStorage: LocalStorageService,
+    private route:Router,
+    private serverInfo:ServerInformationService) {
   }
   ngOnInit(): void {
     //call message method and pass it the parameters on page load
@@ -67,20 +71,17 @@ export class RegisterUserComponent implements OnInit {
       if (res != null) {
         this.status = res.status;
         this.message = res.message;
-        this.showSuccessMessage('SweetAlert Success',
+        this.serverInfo.showSuccessMessage('Success',
         this.message,
         'success',
         true,)
         this.route.navigateByUrl('/log-in');
       }
-      else{
-        this.message = res.message;
-        this.showErrorMessage('Error',
-        this.message,
-        'success',
-        true,)
-      }
-     
+    },e =>{
+      this.serverInfo.showSuccessMessage('Error',
+      e.error.message,
+      'error',
+      true,)
     });
   }
 

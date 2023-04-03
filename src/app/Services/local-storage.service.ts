@@ -110,6 +110,7 @@ export class LocalStorageService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('users');
+    localStorage.removeItem('userName');
   }
 
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { EmployeeResponse } from 'src/app/Models/employee-response';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
+import { ServerInformationService } from 'src/app/Services/server-information.service';
 import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
 import Swal from 'sweetalert2';
 
@@ -19,7 +20,11 @@ export class EditEmployeeComponent implements OnInit {
   newsLetter: string;
   tex: string = "Testing data";
 
-  constructor(private route: ActivatedRoute, public employeeSharedService: EmployeeSharedService, private empService: EmployeeServiceService, private router: Router) {
+  constructor(private route: ActivatedRoute,
+     public employeeSharedService: EmployeeSharedService,
+      private empService: EmployeeServiceService,
+       private router: Router,
+       private serverInfo:ServerInformationService) {
 
   }
 
@@ -57,45 +62,19 @@ export class EditEmployeeComponent implements OnInit {
      
       if (res != null) {
         this.employeeObject = res;
-        this.showSuccessMessage('Edited Successfully!',
+        this.serverInfo.showSuccessMessage('Edited Successfully!',
           this.message,
           'success',
           true,)
         this.router.navigateByUrl('/dashboard')
       }
-      else {
-        this.message = res.message;
-        this.showErrorMessage('Error',
-          this.message,
-          'success',
-          true,)
-      }
+    },e =>{
+      this.serverInfo.showErrorMessage('Error',
+      e.error.message,
+      'error',
+      true,)
+      this.router.navigateByUrl('/dashboard');
     });
-  }
-
-  showSuccessMessage(
-    title, message, icon = null,
-    showCancelButton = true) {
-    return Swal.fire({
-      title: title,
-      text: message,
-      icon: icon,
-      showCancelButton: showCancelButton
-    })
-  }
-  showErrorMessage(
-    title, message, icon = null,
-    showCancelButton = true) {
-    return Swal.fire({
-      title: title,
-      text: message,
-      icon: 'error',
-      showCancelButton: showCancelButton
-    })
-  }
-
-  EditUser() {
-
   }
 }
 

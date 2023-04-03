@@ -15,11 +15,9 @@ export class EmployeeServiceService {
   }
 
   AddCountryApiCall(countryName:AddCountry): Observable<any> {
-    alert("AddCountryApiCall service called");
     return this.http.post<any>("https://localhost:7115/AddCountries",countryName);
   }
   GetAllCountriesApiCall(): Observable<any> {
-    alert("GetAllCountriesApiCall service called");
     return this.http.get<any>("https://localhost:7115/GetAllCountries");
   }
 
@@ -28,17 +26,13 @@ export class EmployeeServiceService {
   }
 
   CreateEmployeeApiCall(employeeAddRequest:EmployeeAddRequest): Observable<any> {
-    alert("GetAllEmployeeApiCall service called");
     return this.http.post<any>("https://localhost:7115/Create",employeeAddRequest);
   }
   EditEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
-    alert("EditEmployeeApiCall service called");
-    alert(employeeAddRequest);
     return this.http.put<any>("https://localhost:7115/Edit",employeeAddRequest);
   }
 
   DeleteEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
-    alert("GetAllEmployeeApiCall service called");
     return this.http.post<any>("https://localhost:7115/Delete",employeeAddRequest);
   }
  

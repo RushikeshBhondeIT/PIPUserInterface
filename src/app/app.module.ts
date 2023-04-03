@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { UniversalAppInterceptorService } from './Services/universal-app-interceptor.service';
 import { LogInComponent } from './Components/log-in/log-in.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TwoFactorAuthenticationComponent } from './Components/two-factor-authentication/two-factor-authentication.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { DataTablesModule } from 'angular-datatables';
 import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.component';
 import { CreateEmployeeComponent } from './Components/create-employee/create-employee.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     EditEmployeeComponent,
     CreateEmployeeComponent,
     ForgotPasswordComponent,
+    ChangePasswordComponent,
     
   ],
   imports: [
@@ -33,7 +36,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FormsModule,
     HttpClientModule,
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    
    
   ],
   providers: [
@@ -42,7 +47,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
       provide: HTTP_INTERCEPTORS,
       useClass: UniversalAppInterceptorService,
       multi: true,
-    }
+    },
+    DatePipe
 
   ],
   bootstrap: [AppComponent]

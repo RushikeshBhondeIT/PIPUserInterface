@@ -1,6 +1,33 @@
-body {
-	margin: 2em;
-}
-td:last-child {
+ td:last-child {
 	text-align: center;
 }
+
+.column {
+	float: left;
+	width: 33.33%;
+} 
+
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.mainContainer {
+	width: 1250px;
+	margin-top: px;
+	margin-left: 10px;
+	position: fixed;
+}
+
+#getDay {
+	padding-top: 15px;
+	padding-right: 30px;
+	margin-left: 10px;
+}
+#valuegetday {
+	width: 150px;
+	margin-right: px;
+}
+
