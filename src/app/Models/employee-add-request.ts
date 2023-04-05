@@ -3,7 +3,7 @@ export class EmployeeAddRequest {
     employeeName: string;
     email: string;
     dateOfBirth: Date;
-    gender: Gender;
+    gender: string;
     countryID: string;
     address: string;
     countryName: string

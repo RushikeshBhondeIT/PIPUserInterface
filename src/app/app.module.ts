@@ -16,6 +16,8 @@ import { CreateEmployeeComponent } from './Components/create-employee/create-emp
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { LeapYearComponent } from './Components/leap-year/leap-year.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CreateEmployeeComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
-    
+    LeapYearComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     DataTablesModule,
     BrowserAnimationsModule,
+    Ng2SearchPipeModule
     
    
   ],

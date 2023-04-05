@@ -1,33 +1,64 @@
  td:last-child {
-	text-align: center;
-}
+ 	text-align: center;
+ }
 
-.column {
-	float: left;
-	width: 33.33%;
-} 
+ .column {
+ 	float: left;
+ 	width: 33.33%;
 
-/* Clear floats after the columns */
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
-}
+ }
 
-.mainContainer {
-	width: 1250px;
-	margin-top: px;
-	margin-left: 10px;
-	position: fixed;
-}
+ /* Clear floats after the columns */
+ .row:after {
+ 	content: "";
+ 	display: table;
+ 	clear: both;
+ }
 
-#getDay {
-	padding-top: 15px;
-	padding-right: 30px;
-	margin-left: 10px;
-}
-#valuegetday {
-	width: 150px;
-	margin-right: px;
-}
+ .mainContainer {
+ 	width: 1250px;
+ 	margin-top: px;
+ 	margin-left: 10px;
+ 	position: relative;
+ }
+
+ #getDay {
+ 	padding-top: 15px;
+ 	padding-right: 30px;
+ 	margin-left: 10px;
+ 	text-align: center;
+ }
+
+ #valuegetday {
+ 	width: 150px;
+ 	margin-right: px;
+ 	text-align: center;
+ }
+
+ #search {
+ 	width: 290px;
+ 	font-size: medium;
+ }
+
+ #getdayOut {
+ 	width: 150px;
+ 	font-weight: bold;
+ 	text-align: center;
+ 	font-size: medium;
+ }
+
+ #getDayBtn {
+ 	padding-top: 15px;
+ 	padding-left: 20px;
+ 	margin-left: 10px;
+ 	text-align: center;
+ 	font-weight: bold;
+ }
+
+ #createEmpBtn {
+ 	width: 200px;
+ 	height: 30px;
+ 	font-size: medium;
+ 	margin-left: 7px;
+ }
 

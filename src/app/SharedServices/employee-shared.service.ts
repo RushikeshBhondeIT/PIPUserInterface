@@ -7,8 +7,6 @@ import { EmployeeResponse } from '../Models/employee-response';
   providedIn: 'root'
 })
 export class EmployeeSharedService {
-//employeeResponce:EmployeeResponse = new EmployeeResponse();
-
   constructor() { }
 
   public employeeResponce : Subject<any> = new Subject<any>;

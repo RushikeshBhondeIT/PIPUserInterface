@@ -1,11 +1,21 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.  
+    min.js">
+    </script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <div class="mainContainer">
-    <div class="row">
+    <div class="row" id="empPage">
         <div class="column">
-            <h3 style="text-align: center;">Employee Management</h3>
+            <div class="row">
+                <div class="column">
+                    <div class="search-hero">
+                        <input class="form-control" id="search" type="text" name="search" [(ngModel)]="searchText"
+                            autocomplete="off" placeholder="Start searching">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="column">
             <h1 style="text-align: center; font-family:fantasy">Employee Management</h1>
@@ -16,22 +26,22 @@
                     <input class="form-control" type="date" aria-label="Search" [(ngModel)]="this.searchItem"
                         style="width: 150px;">
                 </div>
-                <div class="column" style="width:100px"><a class="btn btn-danger" (click)="GetDay()"
-                        style="padding-top:15px;padding-right: 30px;margin-left:10px;">Get Day</a> </div>
-                <div class="column"><input class="form-control" type="text" placeholder="" aria-label="Search"
-                        [(ngModel)]="this.message" style="width: 150px; margin-right: px;"></div>
+                <div class="column" style="width:100px">
+                    <a class="btn btn-danger" id="getDayBtn" (click)="GetDay()">GetDay</a>
+                </div>
+                <div class="column"><input class="form-control" id="getdayOut" type="text" placeholder=""
+                        aria-label="Search" [(ngModel)]="this.message"></div>
             </div>
         </div>
         <div class="card-header">
-            <a class="btn btn-success" (click)="CreateEmployee()">Create New [+]</a>
+            <a class="btn btn-success" (click)="CreateEmployee()" id="createEmpBtn">Create New</a>
         </div>
         <div class="card-body">
-            <!-- datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" -->
-            <!-- class="table table-bordered table-striped table-hover display"  -->
-            <table id="sort" style="width:100%" class="table table-bordered table-striped table-hover display">
+
+            <!-- <table id="sort" style="width:100%" class="table table-bordered table-striped table-hover display">
                 <thead class="bg-dark text-white" >
                     <tr>
-                        <td>employeeId</td>
+                        <td style="margin-left: 200px;">employeeId</td>
                         <td>employeeName</td>
                         <td>email</td>
                         <td>dateOfBirth</td>
@@ -63,8 +73,81 @@
                     </tr>
                 </tbody>
 
+            </table> -->
+            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <td>employee Id</td>
+                        <td>Employee Name</td>
+                        <td>Email</td>
+                        <td>Date Of Birth</td>
+                        <td>Gender</td>
+                        <td>Country Name</td>
+                        <td>Address</td>
+                        <td>News Letters</td>
+                        <td>Age</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tfoot class="bg-dark text-white">
+                    <tr>
+                        <td>employee Id</td>
+                        <td>Employee Name</td>
+                        <td>Email</td>
+                        <td>Date Of Birth</td>
+                        <td>Gender</td>
+                        <td>Country Name</td>
+                        <td>Address</td>
+                        <td>News Letters</td>
+                        <td>Age</td>
+                        <td>Action</td>
+                    </tr>
+
+                </tfoot>
+                <tbody>
+                    <tr *ngFor="let item of Employees | filter:searchText">
+                        <td>{{item.employeeId}}</td>
+                        <td>{{item.employeeName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.dateOfBirth |date}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.countryName}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.receiveNewsLetters}}</td>
+                        <td>{{item.age}}</td>
+                        <td>
+                            <a class="btn btn-primary" (click)="Editinvoice(item)">Edit</a> |
+                            <a class="btn btn-danger" (click)="DeleteEmployee(item)">Delete</a> |
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
         </div>
 
     </div>
+
+    <!-- <script>
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#example tfoot th').each(function () {
+                var title = $('#example thead th').eq($(this).index()).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+
+            // DataTable
+            var table = $('#example').DataTable();
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    that
+                        .search(this.value)
+                        .draw();
+                });
+            });
+        });
+
+    </script> -->

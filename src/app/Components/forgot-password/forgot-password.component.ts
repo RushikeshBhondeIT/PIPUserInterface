@@ -11,46 +11,18 @@ import { ServerInformationService } from 'src/app/Services/server-information.se
 })
 export class ForgotPasswordComponent {
   email: string;
-  errmsg: string;
   message: string;
   status: string;
   token: any;
   resetToken: string = "";
   link: string = "";
-
   changePassword: ChangePassword = new ChangePassword();
 
-
-  constructor(private accService: AccountsControllerService, private serverInfo: ServerInformationService , private router:Router) {
+  constructor(private accService: AccountsControllerService, private serverInfo: ServerInformationService, private router: Router) {
   }
   ngOnInit() {
 
   }
-
-
-
-  // public async ForgotPassword() {
-  //   await this.accService.ForgotPasswordApiCall(this.email).subscribe(res => {
-  //     if (res != null) {
-  //       this.message = res.message;
-  //       this.status = JSON.stringify(res.status);
-  //       if (this.status == 'Error') {
-  //         this.serverInfo.showErrorMessage('Error!',
-  //           this.message,
-  //           'error',
-  //           true,)
-  //       }
-  //       else {
-  //         this.serverInfo.showSuccessMessage('Success!',
-  //           this.message,
-  //           'success',
-  //           true,)
-  //       }
-  //     }
-  //   });
-  // }
-
-
 
   ForgotPassword() {
     this.accService.ForgotPasswordApiCall(this.email).subscribe(res => {
@@ -63,46 +35,34 @@ export class ForgotPasswordComponent {
           true,)
         this.ResetPassword(this.link);
       }
-    }, e =>{
+    }, e => {
       this.serverInfo.showErrorMessage('error',
-      e.error.message,
-      'error',
-      true,)
+        e.error.message,
+        'error',
+        true,)
     });
   }
 
   ResetPassword(link: string) {
     this.accService.ResetPasswordApiCall(link).subscribe(res => {
-      if (res != null && res.status==200) {
+      if (res != null) {
         this.link = res.status;
         this.message = res.message;
         var model = res.model;
         this.resetToken = model["token"];
-        localStorage.setItem('resetPasswordToken',this.resetToken);
+        localStorage.setItem('resetPasswordToken', this.resetToken);
         this.router.navigateByUrl('/change-password');
         this.serverInfo.showSuccessMessage('Success',
-        'reset password',
+          'reset password',
+          'success',
+          true,)
+      }
+    }, e => {
+      this.serverInfo.showErrorMessage('error',
+        e.error.message,
         'error',
         true,)
-        
-      }
-    },e =>{
-      this.serverInfo.showErrorMessage('error',
-      e.error.message,
-      'error',
-      true,)
     });
     this.router.navigateByUrl('/change-password');
   }
-
-  // ChangePassword() {
-  //   this.changePassword.token = localStorage.getItem('resetPasswordToken');
-  //   alert(this.changePassword);
-  //   this.accService.ChangePasswordApiCall(this.changePassword).subscribe(res => {
-  //     if (res != null) {
-  //       this.status = res.status;
-  //       this.message = res.message;
-  //     }
-  //   });
-  // }
 }

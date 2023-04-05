@@ -1,4 +1,4 @@
-<div id="headerdiv" >
+<div id="headerdiv">
   <nav class="container-fluid navbar navbar-expand-lg">
     <div class="collapse navbar-collapse container" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -6,41 +6,13 @@
           <a class="nav-link" [routerLink]="['/dashboard']" id="navbarDropdown"><span class="glyphicon glyphicon-home"
               aria-hidden="true" style="font-weight: bold;"> Dashboard</span></a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link " href="#" id="navbarDropdown">Notifications</a>
-        </li>
-
-        <li style="padding-top: 10px; margin-left: px;">
-          <div class="row">
-            <div class="column">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-              [(ngModel)]="searchItem">
-            </div>
-            <div class="column">
-              <button class="btn btn-success my-2 my-sm-0" type="submit" id="navbarDropdown"
-              (click)="search()">Search</button>
-            </div>
-          </div>
-        </li>
-
-        
-
-        <li style="padding-top: 15px;margin-left: px;width: px;">
-          <a>Welcome <b>{{this.userName}}!</b> </a>
-        </li>
         <li style="padding-top: 15px;margin-left: px;width: px;">
           <a>Server Time: <b>{{this.serverTime | date}} </b> </a>
         </li>
-
-        <!-- <li>
-          <button class="btn btn-primary" style="margin-top: 15px;margin-left: 50px;" (click)="Logout()">LogOut</button>
-        </li> -->
-
-        <li class="nav-item dropdown" style="margin-left: PX;">
+        <li class="nav-item dropdown" style="margin-left:px;">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Account
+            aria-haspopup="true" aria-expanded="false"  style="margin-left: px;">
+            <a>Welcome <b>{{this.userName}}!</b> </a>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" values="All" href="#" [routerLink]="['/forgot-password']">Forgot Password</a>
@@ -48,6 +20,9 @@
             <a class="dropdown-item" values="Appliences" href="#" (click)="Logout()">LogIn</a>
             <a class="dropdown-item" values="Home Decore" href="#" (click)="Logout()">LogOut</a>
           </div>
+        </li>
+        <li>
+          <button class="btn btn-primary" style="margin-top: 15px; align-items: end;" (click)="Logout()">LogOut</button>
         </li>
       </ul>
     </div>

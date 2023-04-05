@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'jquery';
+import { CountryResponse } from 'src/app/Models/country-response';
 import { EmployeeAddRequest } from 'src/app/Models/employee-add-request';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
@@ -18,19 +19,35 @@ export class CreateEmployeeComponent {
   employeeAddRequest: EmployeeAddRequest = new EmployeeAddRequest()
   newsLetter: string;
   message: string;
+  countries: CountryResponse[];
 
   constructor(private empService: EmployeeServiceService,
     private router: Router,
     private localStorage: LocalStorageService,
     private serverInfo: ServerInformationService) {
-
+    this.getAllCountries();
   }
 
 
+  getAllCountries() {
+    this.empService.GetAllCountriesApiCall().subscribe(res => {
+      if (res != null) {
+        this.countries = res;
+      }
+    });
+  }
+  selectCountry(value: string): void {
+
+    this.employeeAddRequest.countryName = value;
+  }
+
+  selectGender(value: string): void {
+
+    this.employeeAddRequest.gender = value;
+  }
 
   NewsLetterSelected(value: string): void {
     this.newsLetter = value;
-    alert((this.newsLetter));
     this.employeeAddRequest.receiveNewsLetters = JSON.parse(this.newsLetter);
   }
 
@@ -45,11 +62,11 @@ export class CreateEmployeeComponent {
             true,)
           this.router.navigateByUrl('/dashboard');
         }
-      },e =>{
+      }, e => {
         this.serverInfo.showErrorMessage('Error',
-        e.error.message,
-        'error',
-        true,)
+          e.error.message,
+          'error',
+          true,)
         this.router.navigateByUrl('/dashboard');
       });
     }

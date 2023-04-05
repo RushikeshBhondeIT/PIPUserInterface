@@ -22,6 +22,7 @@ export class LogInComponent {
 
   LogIn() {
     this.localStorage.setItem("userName", this.logInModel.userName);
+    this.logInToLeapYear(this.logInModel);
     this.empService.logInApiCall(this.logInModel).subscribe(res => {
       if (res != null || res.status == "Success") {
         this.localStorage.saveToken(res.token, res.expration);
@@ -34,15 +35,22 @@ export class LogInComponent {
           true,)
         this.route.navigateByUrl('dashboard');
       }
-    },e =>{
+    }, e => {
       this.serverInfo.showErrorMessage('Error',
-      e.error.message,
-      'error',
-      true,)
+        e.error.message,
+        'error',
+        true,)
     });
     this.route.navigateByUrl('/log-in');
   }
 
+  logInToLeapYear(loginModel: LogInModel) {
+    this.serverInfo.logInToLeapYearsApiCall(loginModel).subscribe(res => {
+      if (res != null) {
+        console.log('Leap Year Logged In Successfully !');
+      }
+    });
+  }
 
 
   // showErrorMessage(

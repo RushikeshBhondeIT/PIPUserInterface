@@ -18,10 +18,6 @@ export class AccountsControllerService {
   constructor(private http: HttpClient) {
   }
 
-  private token: string;
-  private loggedInUserName: string;
-  private jwtHelper = new JwtHelperService();
-
   registerUser(registerUser: RegisterUser, role: string): Observable<any> {
     return this.http.post<any>("https://localhost:7115/RegisterAdmin?Role=" + role, registerUser);
   }
@@ -44,19 +40,12 @@ export class AccountsControllerService {
 
   ResetPasswordApiCall(url :string): Observable<any> {
    return this.http.get<any>(url);
-    //return this.http.get<any>(url);
   }
 
 
   ChangePasswordApiCall(changePassword: ChangePassword): Observable<any> {
     return this.http.post<any>("https://localhost:7115/change-password",changePassword);
   }
-
-
-  // GetAllEmployeeApiCall(): Observable<any> {
-  //   alert("GetAllEmployeeApiCall service called");
-  //   return this.http.get<any>("https://localhost:7115/GetAllEmployees");
-  // }
 
   AddCountryApiCall(countryName:AddCountry): Observable<any> {
     return this.http.post<any>("https://localhost:7115/AddCountries",countryName);

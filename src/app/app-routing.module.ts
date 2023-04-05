@@ -5,6 +5,7 @@ import { CreateEmployeeComponent } from './Components/create-employee/create-emp
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { LeapYearComponent } from './Components/leap-year/leap-year.component';
 import { LogInComponent } from './Components/log-in/log-in.component';
 import { RegisterUserComponent } from './Components/register-user/register-user.component'; 
 import { TwoFactorAuthenticationComponent } from './Components/two-factor-authentication/two-factor-authentication.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'create-employee',component:CreateEmployeeComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'change-password',component:ChangePasswordComponent},
+  {path:'leap-year',component:LeapYearComponent},
   {path:'', redirectTo:'/log-in',pathMatch:'full'}
   
 ];

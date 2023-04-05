@@ -6,28 +6,37 @@ import { AddCountry } from '../Models/add-country';
 import { EmployeeAddRequest } from '../Models/employee-add-request';
 import { EmployeeResponse } from '../Models/employee-response';
 import Swal from 'sweetalert2';
+import { LogInModel } from '../Models/log-in-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerInformationService {
-
+  urlemp='https://localhost:7115/';
+  urlLeap='https://localhost:7010/';
   header: HttpHeaders = new HttpHeaders();
+
   constructor(private http: HttpClient) {
   }
+
   GetServerTimeApiCall(): Observable<any> {
-    return this.http.get<any>("https://localhost:7115/GetServerTime");
+    return this.http.get<any>(this.urlemp+"GetServerTime");
   }
   GetDayTimeApiCall(dateTime:string): Observable<any> {
-    return this.http.get<any>("https://localhost:7115/GetDay?dateTime="+dateTime);
+    return this.http.get<any>(this.urlemp+"GetDay?dateTime="+dateTime);
   }
 
-  GetLeapYearsTimeApiCall(startYear:number,endYear:number): Observable<any> {
-    return this.http.get<any>("https://localhost:7010/LeapYears?StartYear="+startYear+"&EndYear="+endYear);
+  GetLeapYearsApiCall(startYear:number,endYear:number): Observable<any> {
+    return this.http.get<any>(this.urlLeap+"LeapYears?StartYear="+startYear+"&EndYear="+endYear);
   }
-  GetLeapYearsDayTimeApiCall(startYear:Date,endYear:Date): Observable<any> {
-    return this.http.get<any>("https://localhost:7010/LeapYearsDay?startDate="+startYear+"&endDate="+endYear);
+  GetLeapYearsDayApiCall(startYear:Date,endYear:Date): Observable<any> {
+    return this.http.get<any>(this.urlLeap+"LeapYearsDay?startDate="+startYear+"&endDate="+endYear);
   }
+
+  logInToLeapYearsApiCall(loginModel:LogInModel): Observable<any> {
+    return this.http.post<any>(this.urlLeap+'LogIn',loginModel);
+  }
+
   showErrorMessage(
     title, message, icon = null,
     showCancelButton = true) {

@@ -7,9 +7,10 @@ import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
 import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
 import Swal from 'sweetalert2';
-import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { DatePipe } from '@angular/common';
-import {MatTableModule} from '@angular/material/table';
+
 
 
 
@@ -25,7 +26,9 @@ export class DashboardComponent implements OnInit {
   message: string = ""
   status: string = ""
   searchItem: Date;
+  searchText:string;
   employeeResponseObject: EmployeeResponse;
+  title = 'Angular Search Using ng2-search-filter';
   
 
   // employeeObject: EmployeeResponse = new EmployeeResponse();
@@ -42,13 +45,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.GetAllEmployee();
     this.Employees = this.GetAllEmployee();
+
   }
- 
 
-
-
-  changeDate() {
-
+  Search() {
+   
+    
   }
   GetDay() {
     var someDateVar = this.datepipe.transform(this.searchItem, 'MM-dd-YYYY');

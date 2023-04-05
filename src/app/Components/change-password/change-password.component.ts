@@ -35,7 +35,6 @@ export class ChangePasswordComponent {
   ChangePassword() {
     if (this.changePassword.password == this.changePassword.confirmPassword) {
       this.changePassword.token = localStorage.getItem('resetPasswordToken');
-      alert(this.changePassword.token);
       this.accService.ChangePasswordApiCall(this.changePassword).subscribe(res => {
         if (res != null) {
           this.status = res.status;
@@ -44,6 +43,7 @@ export class ChangePasswordComponent {
             this.message,
             'success',
             true,)
+            this.router.navigateByUrl('/log-in');
         }
       }, e => {
         this.serverInfo.showErrorMessage('Error',
