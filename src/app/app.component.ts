@@ -66,10 +66,4 @@ export class AppComponent {
     this.router.navigateByUrl('/forgot-password')
   }
   
-  GetddlValue(cat: string) {
-
-  }
-  search() {
-    //this.router.navigate(["/search"], { queryParams: { searchItem: this.searchItem } })
-  }
 }

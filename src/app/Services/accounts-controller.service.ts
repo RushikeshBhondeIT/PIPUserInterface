@@ -51,6 +51,4 @@ export class AccountsControllerService {
     return this.http.post<any>("https://localhost:7115/AddCountries",countryName);
   }
 
-  
-
 }

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RegisterUser } from '../Models/register-user.model';
-import { AddCountry } from '../Models/add-country';
-import { EmployeeAddRequest } from '../Models/employee-add-request';
-import { EmployeeResponse } from '../Models/employee-response';
 import Swal from 'sweetalert2';
 import { LogInModel } from '../Models/log-in-model';
 

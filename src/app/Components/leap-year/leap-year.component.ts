@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LeapYearResponse } from 'src/app/Models/leap-year-response';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
@@ -34,10 +33,10 @@ export class LeapYearComponent {
   leapYearWithDay() {
     this.serverInfo.GetLeapYearsDayApiCall(this.startDate, this.endDate).subscribe(res => {
       if (res != null) {
-       
-        let data =res;
+
+        let data = res;
         let projectNames = data.map(item => {
-          this.leapYearsWithDayResponse =item
+          this.leapYearsWithDayResponse = item
         });
       }
     });

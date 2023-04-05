@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { EmployeeResponse } from 'src/app/Models/employee-response';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
-import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
 import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-employee',
@@ -25,7 +23,7 @@ export class EditEmployeeComponent implements OnInit {
       private empService: EmployeeServiceService,
        private router: Router,
        private serverInfo:ServerInformationService) {
-
+        console.log(this.route);
   }
 
   ngOnInit() {
@@ -40,6 +38,7 @@ export class EditEmployeeComponent implements OnInit {
     this.employeeObject.age = this.route.snapshot.queryParamMap.get("age");
     this.employeeObject.address = this.route.snapshot.queryParamMap.get("address");
   }
+
 
   convertToBoolean(value:string) {
     const booleanTrue: boolean = JSON.parse(value)  // Returns true

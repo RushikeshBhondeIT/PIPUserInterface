@@ -11,9 +11,7 @@ export class EmployeeSharedService {
 
   public employeeResponce : Subject<any> = new Subject<any>;
   getEmployeeResponce = this.employeeResponce.asObservable();
-
    public setEmployeeResponce(empResponce:EmployeeResponse):void {
-    //alert("service" + empResponce.employeeName);
     this.employeeResponce.next(empResponce);
    }
   

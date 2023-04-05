@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { error } from 'jquery';
 import { CountryResponse } from 'src/app/Models/country-response';
 import { EmployeeAddRequest } from 'src/app/Models/employee-add-request';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
-import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-create-employee',
@@ -27,7 +25,6 @@ export class CreateEmployeeComponent {
     private serverInfo: ServerInformationService) {
     this.getAllCountries();
   }
-
 
   getAllCountries() {
     this.empService.GetAllCountriesApiCall().subscribe(res => {
@@ -72,26 +69,4 @@ export class CreateEmployeeComponent {
     }
   }
 
-
-
-  showErrorMessage(
-    title, message, icon = null,
-    showCancelButton = true) {
-    return Swal.fire({
-      title: title,
-      text: message,
-      icon: 'error',
-      showCancelButton: showCancelButton
-    })
-  }
-  showSuccessMessage(
-    title, message, icon = null,
-    showCancelButton = true) {
-    return Swal.fire({
-      title: title,
-      text: message,
-      icon: icon,
-      showCancelButton: showCancelButton
-    })
-  }
 }

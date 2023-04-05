@@ -1,18 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { EmployeeResponse } from 'src/app/Models/employee-response';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
-import { EmployeeSharedService } from 'src/app/SharedServices/employee-shared.service';
-import Swal from 'sweetalert2';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
 import { DatePipe } from '@angular/common';
-
-
-
 
 @Component({
   selector: 'app-dashboard',
@@ -28,12 +20,8 @@ export class DashboardComponent implements OnInit {
   searchItem: Date;
   searchText:string;
   employeeResponseObject: EmployeeResponse;
-  title = 'Angular Search Using ng2-search-filter';
-  
+ 
 
-  // employeeObject: EmployeeResponse = new EmployeeResponse();
-  // dtoptions: DataTables.Settings = {}
-  // dtTrigger: Subject<any> = new Subject()
   constructor(private empService: EmployeeServiceService,
     private localStorage: LocalStorageService,
     private router: Router,
@@ -48,10 +36,6 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  Search() {
-   
-    
-  }
   GetDay() {
     var someDateVar = this.datepipe.transform(this.searchItem, 'MM-dd-YYYY');
     this.serverInfo.GetDayTimeApiCall(someDateVar).subscribe(res => {
@@ -74,10 +58,8 @@ export class DashboardComponent implements OnInit {
           this.Employees = res
           this.status = res.status;
           this.message = res.message;
-          //this.dtTrigger.next(null);
         }
       });
-      //alert("GetAll employee excecuted");
     }
     return this.Employees;
   }
@@ -90,7 +72,8 @@ export class DashboardComponent implements OnInit {
 
   Editinvoice(employee: EmployeeResponse) {
     if (this.localStorage.isLoggedIn() == true) {
-      this.router.navigate(['/edit-employee'], { queryParams: { employeeId: employee.employeeId, employeeName: employee.employeeName, email: employee.email, countryName: employee.countryName, countryId: employee.countryId, address: employee.address, receiveNewsLetters: employee.receiveNewsLetters, gender: employee.gender, dateOfBirth: employee.dateOfBirth, age: employee.age } }); //Query string with navigate to send ProductId
+      // this.router.navigate(['/edit-employee'], { queryParams: { employeeId: employee.employeeId, employeeName: employee.employeeName, email: employee.email, countryName: employee.countryName, countryId: employee.countryId, address: employee.address, receiveNewsLetters: employee.receiveNewsLetters, gender: employee.gender, dateOfBirth: employee.dateOfBirth, age: employee.age } }); //Query string with navigate to send ProductId
+      this.router.navigate(['/edit-employee'],{queryParams:{...employee}});
     }
   }
 
@@ -114,5 +97,4 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
-
 }

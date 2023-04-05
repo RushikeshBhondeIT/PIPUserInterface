@@ -29,6 +29,7 @@ export class EmployeeServiceService {
     return this.http.post<any>("https://localhost:7115/Create",employeeAddRequest);
   }
   EditEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
+    console.log(employeeAddRequest);
     return this.http.put<any>("https://localhost:7115/Edit",employeeAddRequest);
   }
 

@@ -4,7 +4,7 @@ import { LogInModel } from 'src/app/Models/log-in-model';
 import { AccountsControllerService } from 'src/app/Services/accounts-controller.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-log-in',
@@ -51,27 +51,4 @@ export class LogInComponent {
       }
     });
   }
-
-
-  // showErrorMessage(
-  //   title, message, icon = null,
-  //   showCancelButton = true) {
-  //   return Swal.fire({
-  //     title: title,
-  //     text: message,
-  //     icon: 'error',
-  //     showCancelButton: showCancelButton
-  //   })
-  // }
-
-  // showSuccessMessage(
-  //   title, message, icon = null,
-  //   showCancelButton = true) {
-  //   return Swal.fire({
-  //     title: title,
-  //     text: message,
-  //     icon: icon,
-  //     showCancelButton: showCancelButton
-  //   })
-  // }
 }
