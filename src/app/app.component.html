@@ -1,17 +1,17 @@
-<div id="headerdiv">
-  <nav class="container-fluid navbar navbar-expand-lg">
+<!-- <div id="headerdiv">
+  <nav class="container-fluid navbar top-position navbar-expand-lg">
     <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav  mr-auto">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/dashboard']" id="navbarDropdown"><span class="glyphicon glyphicon-home"
               aria-hidden="true" style="font-weight: bold;"> Dashboard</span></a>
         </li>
-        <li style="padding-top: 15px;margin-left: px;width: px;">
+        <li class="nav-item">
           <a>Server Time: <b>{{this.serverTime | date}} </b> </a>
         </li>
         <li class="nav-item dropdown" style="margin-left:px;">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"  style="margin-left: px;">
+            aria-haspopup="true" aria-expanded="false" style="margin-left: px;">
             <a>Welcome <b>{{this.userName}}!</b> </a>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -28,10 +28,47 @@
     </div>
   </nav>
 
-</div>
+</div> -->
+<!-- </div> -->
+
+<!-- Navbar -->
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-warning" >
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active menu-margin">
+        <a class="nav-link"  [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li class="nav-item menu-margin">
+        <a class="nav-link"> Server Time: <b>{{this.serverTime | date}} </b> </a>
+      </li>
+      <li class="nav-item dropdown menu-margin">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Welcome <b>{{this.userName}}!</b>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" values="All" [routerLink]="['/forgot-password']">Forgot Password</a>
+              <a class="dropdown-item" values="All" [routerLink]="['/forgot-password']">Change Password</a>
+              <a class="dropdown-item" values="Appliences" href="#" (click)="Logout()">LogIn</a>
+              <a class="dropdown-item" values="Home Decore" href="#" (click)="Logout()">LogOut</a>
+            </div>
+      </li>
+      <button class="btn btn-primary menu-margin" (click)="Logout()">LogOut</button>
+    </ul>
+    <button class="btn btn-primary" (click)="Logout()">LogOut</button>
+  </div>
+</nav> -->
 
 
 <router-outlet></router-outlet>
+
 <div class="container-fluid" id="footer" style="text-align: center;">
   © 2023 Copyright:EmployeeManagment
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 import { ChangePassword } from 'src/app/Models/change-password';
 import { AccountsControllerService } from 'src/app/Services/accounts-controller.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
@@ -20,32 +21,31 @@ export class ForgotPasswordComponent {
 
   constructor(private accService: AccountsControllerService, private serverInfo: ServerInformationService, private router: Router) {
   }
-  ngOnInit() {
-
-  }
+ 
 
   ForgotPassword() {
     this.accService.ForgotPasswordApiCall(this.email).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.link = res.status;
         this.message = res.message;
         this.serverInfo.showSuccessMessage('Success',
           this.message,
           'success',
-          true,)
+          false,)
         this.ResetPassword(this.link);
       }
-    }, e => {
-      this.serverInfo.showErrorMessage('error',
-        e.error.message,
+    }, error => {
+      console.log(error);
+      this.serverInfo.showErrorMessage('Error',
+        error.error.message,
         'error',
-        true,)
+        false,)
     });
   }
 
   ResetPassword(link: string) {
     this.accService.ResetPasswordApiCall(link).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.link = res.status;
         this.message = res.message;
         var model = res.model;
@@ -53,15 +53,12 @@ export class ForgotPasswordComponent {
         localStorage.setItem('resetPasswordToken', this.resetToken);
         this.router.navigateByUrl('/change-password');
         this.serverInfo.showSuccessMessage('Success',
-          'reset password',
+          'Your password is reset, will direct to change password!',
           'success',
-          true,)
+          false,)
       }
-    }, e => {
-      this.serverInfo.showErrorMessage('error',
-        e.error.message,
-        'error',
-        true,)
+    }, error => {
+      console.log(error.message);
     });
     this.router.navigateByUrl('/change-password');
   }

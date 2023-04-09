@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { TwoFactorAuth } from 'src/app/Models/two-factor-auth';
 import { AccountsControllerService } from 'src/app/Services/accounts-controller.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
-import Swal from 'sweetalert2';
+import { ServerInformationService } from 'src/app/Services/server-information.service';
+
 
 @Component({
   selector: 'app-two-factor-authentication',
@@ -16,32 +17,31 @@ export class TwoFactorAuthenticationComponent {
   message: string = "";
   code:string="";
   email:string="";
-  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService, private route: Router) {
+  constructor(private empService: AccountsControllerService, 
+    private localStorage: LocalStorageService, 
+    private route: Router,
+    private serverInfo:ServerInformationService) {
   }
   
-  showSuccessMessage(
-    title, message, icon = null,
-    showCancelButton = true) {
-    return Swal.fire({
-      title: title,
-      text: message,
-      icon: icon,
-      showCancelButton: showCancelButton
-    })
-  }
+  
 
 
   TFAlogIn() {
-    alert("Login event clicked");
     this.empService.TFAlogInApiCall(this.tfaAuth).subscribe(res => {
       if (res != null) {
         this.status = res.status;
         this.message = res.message;
-        this.showSuccessMessage('SweetAlert Success',
+        this.serverInfo.showSuccessMessage('Success',
         this.message,
         'success',
-        true,)
+        false,)
       }
+    },error =>{
+      console.log(error.message);
+      this.serverInfo.showSuccessMessage('Error',
+      error.error.message,
+      'error',
+      false,)
     });
   }
 }

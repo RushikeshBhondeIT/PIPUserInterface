@@ -1,48 +1,94 @@
 body {
-    font-family: Arial;
-    color: white;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Float four columns side by side */
+  font-family: Arial;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
   .column {
-    float: left;
-    width: 50%;
-    padding: 0 10px;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
-  
-  /* Remove extra left and right margins, due to padding */
-  .row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive columns */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
-  }
-  
-  
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+#startYear {
+  width: 195px;
+  height: 40px;
+  text-align: center;
+  font-size: medium;
+}
+
+#endYear {
+  width: 195px;
+  height: 40px;
+  text-align: center;
+  font-size: medium;
+  margin-left: 65px;
+}
+
+#getDayBtn {
+  width: 150px;
+  height: 35px;
+  font-size: medium;
+  margin-left: 135px;
+}
+
+#startDate {
+  height: 35px;
+  width: 150px;
+}
+
+#endDate {
+  height: 35px;
+  width: 150px;
+  margin-left: 10px;
+}
+
+#getDay {
+  width: 150px;
+  height: 35px;
+  font-size: medium;
+  margin-left: 50px;
+}
+
+#title{
+  text-align: center;
+  font-size: x-large;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

@@ -5,6 +5,9 @@ import { EmployeeServiceService } from 'src/app/Services/employee-service.servic
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
 import { DatePipe } from '@angular/common';
+import { error } from 'jquery';
+import { AddCountry } from 'src/app/Models/add-country';
+import { CountryResponse } from 'src/app/Models/country-response';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,13 +17,15 @@ import { DatePipe } from '@angular/common';
 
 export class DashboardComponent implements OnInit {
 
-  Employees: EmployeeResponse[] = [];
+  employees: EmployeeResponse[] = [];
   message: string = ""
   status: string = ""
   searchItem: Date;
-  searchText:string;
+  searchText: string;
   employeeResponseObject: EmployeeResponse;
- 
+  errorMessage: any;
+  addCountries: AddCountry = new AddCountry();
+  countryRespose: CountryResponse = new CountryResponse();
 
   constructor(private empService: EmployeeServiceService,
     private localStorage: LocalStorageService,
@@ -28,12 +33,11 @@ export class DashboardComponent implements OnInit {
     private serverInfo: ServerInformationService,
     public datepipe: DatePipe) {
   }
-  displayedColumns: string[] = ['employeeId', 'employeeName', 'email', 'dateOfBirth','gender','countryName','address','NewsLetters','age'];
+  displayedColumns: string[] = ['employeeId', 'employeeName', 'email', 'dateOfBirth', 'gender', 'countryName', 'address', 'NewsLetters', 'age'];
 
   ngOnInit() {
     this.GetAllEmployee();
-    this.Employees = this.GetAllEmployee();
-
+    this.employees = this.GetAllEmployee();
   }
 
   GetDay() {
@@ -42,11 +46,12 @@ export class DashboardComponent implements OnInit {
       if (res != null) {
         this.message = res.message;
       }
-    }, e => {
+    }, error => {
+      console.log(error);
       this.serverInfo.showErrorMessage('Error',
         'DateTime is null !',
         'error',
-        true,)
+        false,)
       this.router.navigateByUrl('/dashboard');
     });
   }
@@ -55,13 +60,16 @@ export class DashboardComponent implements OnInit {
     if (this.localStorage.isLoggedIn() == true) {
       this.empService.GetAllEmployeeApiCall().subscribe(res => {
         if (res != null || res.status == "Success") {
-          this.Employees = res
+          this.employees = res
           this.status = res.status;
           this.message = res.message;
         }
+      }, (error) => {
+        this.errorMessage = error.message + ' ' + ', Something went wrong!';
+        console.log(this.errorMessage);
       });
     }
-    return this.Employees;
+    return this.employees;
   }
 
   CreateEmployee() {
@@ -72,8 +80,7 @@ export class DashboardComponent implements OnInit {
 
   Editinvoice(employee: EmployeeResponse) {
     if (this.localStorage.isLoggedIn() == true) {
-      // this.router.navigate(['/edit-employee'], { queryParams: { employeeId: employee.employeeId, employeeName: employee.employeeName, email: employee.email, countryName: employee.countryName, countryId: employee.countryId, address: employee.address, receiveNewsLetters: employee.receiveNewsLetters, gender: employee.gender, dateOfBirth: employee.dateOfBirth, age: employee.age } }); //Query string with navigate to send ProductId
-      this.router.navigate(['/edit-employee'],{queryParams:{...employee}});
+      this.router.navigate(['/edit-employee'], { queryParams: { ...employee } });
     }
   }
 
@@ -85,16 +92,38 @@ export class DashboardComponent implements OnInit {
           this.serverInfo.showSuccessMessage('Profile Deleted',
             this.message,
             'success',
-            true,)
+            false,)
           this.router.navigateByUrl('/dashboard');
         }
-      }, e => {
+      }, error => {
+        console.log(error);
         this.serverInfo.showErrorMessage('Error',
-          e.error.message,
+          error.error.message,
           'error',
-          true,)
+          false,)
         this.router.navigateByUrl('/dashboard');
       });
     }
+  }
+
+
+  AddCountry() {
+    this.empService.AddCountryApiCall(this.addCountries).subscribe(res => {
+      if (res) {
+        this.countryRespose.countryId = res.countryId,
+          this.countryRespose.countryName = res.countryName
+        this.serverInfo.showSuccessMessage('Success',
+          res.message,
+          'success',
+          false,)
+      }
+
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
+    });
   }
 }

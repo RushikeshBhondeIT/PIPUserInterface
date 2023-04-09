@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { LogInModel } from '../Models/log-in-model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerInformationService {
-  urlemp='https://localhost:7115/';
-  urlLeap='https://localhost:7010/';
+  urlemp=environment.empUrl
+  urlLeap=environment.serverUrl;
   header: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -25,6 +26,7 @@ export class ServerInformationService {
   GetLeapYearsApiCall(startYear:number,endYear:number): Observable<any> {
     return this.http.get<any>(this.urlLeap+"LeapYears?StartYear="+startYear+"&EndYear="+endYear);
   }
+  
   GetLeapYearsDayApiCall(startYear:Date,endYear:Date): Observable<any> {
     return this.http.get<any>(this.urlLeap+"LeapYearsDay?startDate="+startYear+"&endDate="+endYear);
   }

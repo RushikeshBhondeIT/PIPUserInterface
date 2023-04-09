@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-warning" >
+    <a class="navbar-brand glyphicon glyphicon-home font-weight-bold"href="" src=""><a style="margin-left:5px;width:7px; height:10px">Home</a></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active menu-margin">
+          <a class="nav-link font-weight-bold"  [routerLink]="['/dashboard']" >Dashboard</a>
+        </li>
+        <li class="nav-item menu-margin">
+          <a class="nav-link font-weight-bold"> Server Time: <b>{{this.serverTime | date}} </b> </a>
+        </li>
+        <li class="nav-item dropdown menu-margin">
+          <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Welcome <b>{{this.userName}}!</b>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" values="All" [routerLink]="['/forgot-password']">Forgot Password</a>
+                <a class="dropdown-item" values="All" [routerLink]="['/forgot-password']">Change Password</a>
+                <a class="dropdown-item" values="Appliences" href="#" (click)="Logout()">LogIn</a>
+                <a class="dropdown-item" values="Home Decore" href="#" (click)="Logout()">LogOut</a>
+              </div>
+        </li>
+        <button class="btn btn-primary menu-margin font-weight-bold glyphicon glyphicon glyphicon-off" (click)="Logout()"><a style="margin-left:5px;width:7px; height:10px">LogOut</a></button>
+      </ul>
+      <!-- <button class="btn btn-primary" (click)="Logout()">LogOut</button> -->
+    </div>
+  </nav>

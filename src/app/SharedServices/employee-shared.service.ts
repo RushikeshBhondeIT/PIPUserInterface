@@ -14,7 +14,4 @@ export class EmployeeSharedService {
    public setEmployeeResponce(empResponce:EmployeeResponse):void {
     this.employeeResponce.next(empResponce);
    }
-  
-
-
 }

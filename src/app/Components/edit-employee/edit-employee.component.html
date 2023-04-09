@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section class="vh-100">
   <div class="container" style="margin-top: -50px;">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -18,7 +19,7 @@
                         placeholder="Employee Id" [(ngModel)]="employeeObject.employeeId" #employeeId="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && employeeId.invalid }" required />
                       <div *ngIf="f.submitted && employeeId.errors" class="invalid-feedback">
-                        <div *ngIf="employeeId.errors['required']">Employee Name is required</div>
+                        <div *ngIf="employeeId.errors['required']">Employee Id Name is required</div>
                       </div>
                     </div>
                   </div>
@@ -29,6 +30,9 @@
                       <input type="text" id="form3Example1c" name="employeeName" class="form-control"
                         placeholder="Employee Name" [(ngModel)]="employeeObject.employeeName" #employeeName="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && employeeName.invalid }" required />
+                      <span *ngIf="employeeName.touched && employeeName.invalid"
+                        style="color: red;font-size: x-small;">Please
+                        enter valid employee name</span>
                       <div *ngIf="f.submitted && employeeName.errors" class="invalid-feedback">
                         <div *ngIf="employeeName.errors['required']">Employee Name is required</div>
                       </div>
@@ -41,6 +45,8 @@
                       <input type="email" id="form3Example1c" name="email" class="form-control" placeholder="Email"
                         [(ngModel)]="employeeObject.email" #email="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required />
+                      <span *ngIf="email.touched && email.invalid" style="color: red;font-size: x-small;">Please
+                        enter valid email</span>
                       <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
                         <div *ngIf="email.errors['required']">Email is required</div>
                       </div>
@@ -50,14 +56,19 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="date" id="form3Example1c" name="dob" class="form-control" placeholder="Date Of Birth"
-                        [(ngModel)]="employeeObject.dateOfBirth" #dateOfBirth="ngModel"
-                        [ngClass]="{ 'is-invalid': f.submitted && dateOfBirth.invalid }" required />
+                      <input type="date" id="form3Example1cdate" name="dob" class="form-control"
+                        placeholder="Date Of Birth" [(ngModel)]="date" #dateOfBirth="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && dateOfBirth.invalid }" required
+                       />
+                      <span *ngIf="dateOfBirth.touched && dateOfBirth.invalid"
+                        style="color: red;font-size: x-small;">Please
+                        enter your date of birth</span>
                       <div *ngIf="f.submitted && dateOfBirth.errors" class="invalid-feedback">
-                        <div *ngIf="dateOfBirth.errors['required']">Age is required</div>
+                        <div *ngIf="dateOfBirth.errors['required']">Date Of Birth is required</div>
                       </div>
                     </div>
                   </div>
+
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -65,12 +76,15 @@
                       <input type="text" id="form3Example1c" name="gender" class="form-control" placeholder="Gender"
                         [(ngModel)]="employeeObject.gender" #gender="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && gender.invalid }" required />
+                      <span *ngIf="gender.touched && gender.invalid" style="color: red;font-size: x-small;">Please
+                        enter your gender</span>
                       <div *ngIf="f.submitted && gender.errors" class="invalid-feedback">
                         <div *ngIf="gender.errors['required']">Gender Type is required</div>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
+
+                  <!-- <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="text" id="form3Example1c" name="countryName" class="form-control"
@@ -78,6 +92,25 @@
                         [ngClass]="{ 'is-invalid': f.submitted && countryName.invalid }" required />
                       <div *ngIf="f.submitted && countryName.errors" class="invalid-feedback">
                         <div *ngIf="countryName.errors['required']">Country Name is required</div>
+                      </div>
+                    </div>
+                  </div> -->
+
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select #channel (change)="selectCountry(channel.value)" class="form-control" name="country"
+                        [(ngModel)]="employeeObject.countryName" #country="ngModel" [ngClass]="{'invalid-data': country.invalid && f.submitted, 
+                        'valid-data': country.valid && f.submitted}" required>
+                        <option>{{employeeObject.countryName}}</option>
+                        <option *ngFor="let country of countries">{{country.countryName}}
+                        </option>
+                      </select>
+                      <span *ngIf="country.touched && country.invalid" style="color: red;font-size: x-small;">Please
+                        enter your country name</span>
+                      <div *ngIf="country.invalid && f.submitted">
+                        <span style="color: red;">Please Select Country.</span>
                       </div>
                     </div>
                   </div>
@@ -88,6 +121,8 @@
                       <input type="text" id="form3Example1c" name="address" class="form-control" placeholder="Address"
                         [(ngModel)]="employeeObject.address" #address="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" required />
+                      <span *ngIf="address.touched && address.invalid" style="color: red;font-size: x-small;">Please
+                        enter your address</span>
                       <div *ngIf="f.submitted && address.errors" class="invalid-feedback">
                         <div *ngIf="address.errors['required']">Address is required</div>
                       </div>
@@ -98,6 +133,7 @@
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <select #teams (change)="NewsLetterSelected(teams.value)" style="width:390px;height: 35px;">
+                        <option>{{employeeObject.receiveNewsLetters}}</option>
                         <option>true</option>
                         <option>false</option>
                       </select>
@@ -105,7 +141,8 @@
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Edit Employee Profile</button>
+                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="!f.valid">Edit Employee
+                      Profile</button>
                   </div>
 
                 </form>

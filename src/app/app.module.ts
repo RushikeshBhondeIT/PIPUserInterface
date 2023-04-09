@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule } from  '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,9 +15,12 @@ import { EditEmployeeComponent } from './Components/edit-employee/edit-employee.
 import { CreateEmployeeComponent } from './Components/create-employee/create-employee.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LeapYearComponent } from './Components/leap-year/leap-year.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { NonAppHeaderComponent } from './Components/non-app-header/non-app-header.component';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { LeapYearComponent } from './Components/leap-year/leap-year.component';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     LeapYearComponent,
+    HeaderComponent,
+    NonAppHeaderComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,10 +45,9 @@ import { LeapYearComponent } from './Components/leap-year/leap-year.component';
     HttpClientModule,
     CommonModule,
     DataTablesModule,
-    BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule, 
     
-   
+  
   ],
   providers: [
     NgModule,
@@ -51,7 +56,8 @@ import { LeapYearComponent } from './Components/leap-year/leap-year.component';
       useClass: UniversalAppInterceptorService,
       multi: true,
     },
-    DatePipe
+    DatePipe,
+    
 
   ],
   bootstrap: [AppComponent]

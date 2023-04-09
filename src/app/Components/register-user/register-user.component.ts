@@ -21,73 +21,104 @@ export class RegisterUserComponent implements OnInit {
   userRegister: RegisterUser = new RegisterUser();
   confirmEmailModel: ConfirmEmail = new ConfirmEmail();
   tfaAuth: TwoFactorAuth = new TwoFactorAuth();
-  selectedTeam : string = "";
+  selectedTeam: string = "Admin";
   status: string = "";
   message: string = "";
   email: string = "";
   addCountries: AddCountry = new AddCountry();
   countryRespose: CountryResponse = new CountryResponse();
+  model: string;
 
-  constructor(private empService: AccountsControllerService, 
+  constructor(private empService: AccountsControllerService,
     private localStorage: LocalStorageService,
-    private route:Router,
-    private serverInfo:ServerInformationService) {
+    private route: Router,
+    private serverInfo: ServerInformationService) {
   }
-  
-  ngOnInit(): void {
 
-   
+  ngOnInit(): void {
   }
 
   registerUser() {
     this.empService.registerUser(this.userRegister, this.selectedTeam).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.status = res.status;
         this.message = res.message;
         this.serverInfo.showSuccessMessage('Success',
-        this.message,
-        'success',
-        true,)
+          this.message,
+          'success',
+          false,)
         this.route.navigateByUrl('/log-in');
       }
-    },e =>{
+    }, error => {
+      console.log(error.message);
       this.serverInfo.showSuccessMessage('Error',
-      e.error.message,
-      'error',
-      true,)
+        error.error.message,
+        'error',
+        false,)
     });
   }
 
 
-	onSelected(value:string): void {
-		this.selectedTeam = value;
-	}
+  onSelected(value: string): void {
+    this.selectedTeam = value;
+  }
 
   confirmEmail() {
     this.empService.confirmEmail(this.confirmEmailModel).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.status = res.status;
         this.message = res.message;
+        this.serverInfo.showErrorMessage('Success',
+          res.message,
+          'success',
+          false,)
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
-  
+
   TFAlogIn() {
     this.empService.TFAlogInApiCall(this.tfaAuth).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.status = res.status;
         this.message = res.message;
+        this.serverInfo.showErrorMessage('Success',
+          res.message,
+          'success',
+          false,)
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
 
 
   AddCountry() {
     this.empService.AddCountryApiCall(this.addCountries).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.countryRespose.countryId = res.countryId,
           this.countryRespose.countryName = res.countryName
+        this.serverInfo.showErrorMessage('Success',
+          res.message,
+          'success',
+          false,)
       }
+
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
 }

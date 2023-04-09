@@ -16,39 +16,45 @@ export class LogInComponent {
   logInModel: LogInModel = new LogInModel();
   message: string = ""
   status: string = ""
-  errmsg: string;
-  constructor(private empService: AccountsControllerService, private localStorage: LocalStorageService, private route: Router, private serverInfo: ServerInformationService) {
+  errorMessage: string;
+  constructor(private empService: AccountsControllerService,
+    private localStorage: LocalStorageService,
+    private route: Router,
+    private serverInfo: ServerInformationService) {
   }
 
   LogIn() {
-    this.localStorage.setItem("userName", this.logInModel.userName);
+    this.localStorage.setItem("email", this.logInModel.email);
     this.logInToLeapYear(this.logInModel);
     this.empService.logInApiCall(this.logInModel).subscribe(res => {
-      if (res != null || res.status == "Success") {
+      if (res) {
         this.localStorage.saveToken(res.token, res.expration);
         this.localStorage.loadToken();
         this.message = res.message;
         this.status = res.status;
-        this.serverInfo.showSuccessMessage('Logged In Successfully!',
-          this.message,
-          'success',
-          true,)
         this.route.navigateByUrl('dashboard');
       }
-    }, e => {
+    }, error => {
+      console.log(error.message)
       this.serverInfo.showErrorMessage('Error',
-        e.error.message,
+        this.errorMessage = error.error.message,
         'error',
-        true,)
+        false,)
     });
     this.route.navigateByUrl('/log-in');
   }
 
   logInToLeapYear(loginModel: LogInModel) {
     this.serverInfo.logInToLeapYearsApiCall(loginModel).subscribe(res => {
-      if (res != null) {
+      if (res) {
         console.log('Leap Year Logged In Successfully !');
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
 }

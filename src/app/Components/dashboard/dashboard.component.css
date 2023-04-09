@@ -1,64 +1,86 @@
- td:last-child {
- 	text-align: center;
- }
+td:last-child {
+	text-align: center;
+}
 
- .column {
- 	float: left;
- 	width: 33.33%;
+.column {
+	float: left;
+	width: 33.33%;
 
- }
+}
 
- /* Clear floats after the columns */
- .row:after {
- 	content: "";
- 	display: table;
- 	clear: both;
- }
+/* Clear floats after the columns */
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
- .mainContainer {
- 	width: 1250px;
- 	margin-top: px;
- 	margin-left: 10px;
- 	position: relative;
- }
+/* .mainContainer {
+	width: 1250px;
+	margin-top: px;
+	margin-left: 10px;
+	position: relative;
+} */
 
- #getDay {
- 	padding-top: 15px;
- 	padding-right: 30px;
- 	margin-left: 10px;
- 	text-align: center;
- }
+#getDay {
+	padding-top: 15px;
+	padding-right: 30px;
+	margin-left: 10px;
+	text-align: center;
+}
 
- #valuegetday {
- 	width: 150px;
- 	margin-right: px;
- 	text-align: center;
- }
+#valuegetday {
+	width: 150px;
+	margin-right: px;
+	text-align: center;
+}
 
- #search {
- 	width: 290px;
- 	font-size: medium;
- }
+#search {
+	width: 290px;
+	font-size: medium;
+}
 
- #getdayOut {
- 	width: 150px;
- 	font-weight: bold;
- 	text-align: center;
- 	font-size: medium;
- }
+#getdayOut {
+	width: 150px;
+	font-weight: bold;
+	text-align: center;
+	font-size: medium;
+}
 
- #getDayBtn {
- 	padding-top: 15px;
- 	padding-left: 20px;
- 	margin-left: 10px;
- 	text-align: center;
- 	font-weight: bold;
- }
+#getDayBtn {
+	padding-top: 15px;
+	padding-left: 20px;
+	margin-left: 10px;
+	text-align: center;
+	font-weight: bold;
+}
 
- #createEmpBtn {
- 	width: 200px;
- 	height: 30px;
- 	font-size: medium;
- 	margin-left: 7px;
- }
+#createEmpBtn {
+	width: 200px;
+	height: 30px;
+	font-size: medium;
+	margin-left: 7px;
+}
 
+.dashboard-banner {
+	position: fixed;
+	top: 65px;
+}
+
+.fixed-table {
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.th {
+	position: sticky;
+	top: 0px;
+}
+
+.t-body {
+	/* position:relative;
+   width:100%; */
+	/* display: block;
+   overflow-y: scroll; */
+	/* height: 500px; */
+}

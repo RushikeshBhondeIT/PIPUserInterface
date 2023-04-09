@@ -10,3 +10,7 @@ img{
   height:300px;
   margin-left: 40px;
 }
+
+input.ng-invalid.ng-touched{
+  border-color: red;
+}

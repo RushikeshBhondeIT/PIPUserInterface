@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { LogInModel } from '../Models/log-in-model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AccountsControllerService } from './accounts-controller.service';
+import { Router } from '@angular/router';
+import { data } from 'jquery';
 
 
 @Injectable({
@@ -14,8 +16,8 @@ export class LocalStorageService {
   private expiration: string;
   private loggedInUserName: string;
   private jwtHelper = new JwtHelperService();
-  constructor(private account: AccountsControllerService) {
-
+  constructor(private account: AccountsControllerService,private router:Router) {
+  
   }
 
   setItem(key: string, value: any) {
@@ -55,14 +57,14 @@ export class LocalStorageService {
     if (this.token != null && this.token != '') {
       const expiry = (JSON.parse(atob(this.token.split('.')[1]))).exp;
       newvalue = expiry * 1000 > Date.now();
-      if (newvalue != null) {
+      if (newvalue) {
         return true
       }
       else {
         return false;
       }
     }
-    if (JSON.parse(this.token) == 'null' ||JSON.parse(this.token)=='Undefined' ) {
+    if (JSON.parse(this.token) == 'null' || JSON.parse(this.token) == 'Undefined') {  
       this.autologout(this.tokenExpirationTimer);
       return false;
     }
@@ -71,13 +73,12 @@ export class LocalStorageService {
       return false;
     }
   }
-
+  
   autologout(expirationDuration: number) {
     console.log(expirationDuration);
-    this.tokenExpirationTimer = setTimeout(() => {
+    setTimeout(() => {
       this.LogOut();
-
-
+      console.log('expirationDuration');
     }, expirationDuration);
   }
 
@@ -89,6 +90,7 @@ export class LocalStorageService {
     localStorage.removeItem('expiration');
     localStorage.removeItem('users');
     localStorage.removeItem('userName');
+    this.router.navigateByUrl('/log-in');
   }
 
 }

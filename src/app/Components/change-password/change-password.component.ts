@@ -12,8 +12,6 @@ import { ServerInformationService } from 'src/app/Services/server-information.se
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent {
-
-
   email: string;
   errmsg: string;
   message: string;
@@ -28,32 +26,28 @@ export class ChangePasswordComponent {
     private fb: FormBuilder) {
   }
 
-  ngOnInit() {
-
-  }
-
   ChangePassword() {
     if (this.changePassword.password == this.changePassword.confirmPassword) {
       this.changePassword.token = localStorage.getItem('resetPasswordToken');
       this.accService.ChangePasswordApiCall(this.changePassword).subscribe(res => {
-        if (res != null) {
+        if (res) {
           this.status = res.status;
           this.message = res.message;
           this.serverInfo.showSuccessMessage('Password Changed!',
             this.message,
             'success',
-            true,)
-            this.router.navigateByUrl('/log-in');
+            false,)
+          this.router.navigateByUrl('/log-in');
         }
-      }, e => {
+      }, error => {
+        console.log(error.message);
         this.serverInfo.showErrorMessage('Error',
-          e.error.message,
+          this.errmsg = error.error.message,
           'error',
-          true,)
+          false,)
         this.local.LogOut();
         this.router.navigateByUrl('/log-in');
       });
-
     }
   }
 }

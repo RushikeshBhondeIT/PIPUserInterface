@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "@schematics/angular": "^9.1.0",
     "angular-datatables": "^15.0.0",
+    "bootstrap": "4.6",
     "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.11.3",
     "jquery": "^3.6.0",

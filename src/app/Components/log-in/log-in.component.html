@@ -1,3 +1,4 @@
+<app-non-app-header></app-non-app-header>
 <h1 class="title">Welcome to User Login</h1>
 <section class="vh-100">
     <div class="container-fluid h-custom">
@@ -10,11 +11,14 @@
                 <form name="form" (ngSubmit)="f.form.valid && LogIn()" #f="ngForm">
                     <!-- Email input -->
                     <div class="form-outline mb-4">
+                        <label class="form-label" for="form3Example3">Email: &nbsp;</label>
                         <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
-                            placeholder="Enter a valid User Name" [(ngModel)]="logInModel.userName" #email="ngModel"
+                            placeholder="Enter a valid User Name" [(ngModel)]="logInModel.email"
+                            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel"
                             [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required />
-                        <label class="form-label" for="form3Example3">User Name</label>
-                        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                        <span *ngIf="email.touched &&email.invalid" style="color: red;font-size: x-small;">Please enter
+                            the valid email</span>
+                        <div *ngIf="f.submitted && email.errors " class="invalid-feedback">
                             <div *ngIf="email.errors['required']">UserName is required</div>
                             <div *ngIf="email.errors['pattern']">Enter Valied UserName address</div>
                         </div>
@@ -23,11 +27,12 @@
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
+                        <label class="form-label" for="form3Example4">Password : &nbsp;</label>
                         <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
                             placeholder="Enter password" [(ngModel)]="logInModel.password" #password="ngModel"
                             [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required
                             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*_]).{6,20}$" />
-                        <label class="form-label" for="form3Example4">Password</label>
+                        <span *ngIf="password.touched && password.invalid" style="color: red;font-size: x-small;">Please enter the valid password</span>
                         <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
                             <div *ngIf="password.errors['required']">Password is required</div>
                             <div *ngIf="password.errors['pattern']">Enter Valied Password </div>
@@ -35,7 +40,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <p style="color:red">{{errmsg}}</p>
+                        <p style="color:red">{{errorMessage}}</p>
                     </div>
 
                     <p class="small fw-bold mt-2 pt-1 mb-0">
@@ -45,7 +50,8 @@
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" class="btn btn-primary btn-lg"
-                            style="padding-left: 2.5rem; padding-right: 2.5rem; width: 200px;">Login</button>
+                            style="padding-left: 2.5rem; padding-right: 2.5rem; width: 200px;"
+                            [disabled]="!f.valid">Login</button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                             <a [routerLink]="['/register-user']" class="link-danger">Register</a>
                         </p>

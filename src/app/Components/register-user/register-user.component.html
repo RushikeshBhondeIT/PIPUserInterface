@@ -1,4 +1,4 @@
-
+<app-non-app-header></app-non-app-header>
 <section class="vh-100">
   <div class="container" style="margin-top: -50px;">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -16,12 +16,16 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <select #teams (change)="onSelected(teams.value)" style="width:390px;height: 35px;">
-                        <option>Role</option>
+                      <select #teams (change)="onSelected(teams.value)" style="width:390px;height: 35px;"
+                        [(ngModel)]="teams.value" #role="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && role.invalid }" required>
                         <option>Admin</option>
                         <option>HR</option>
                         <option>User</option>
                       </select>
+                      <!-- <label class="form-label" for="form3Example3">Role: &nbsp;</label> -->
+                      <span *ngIf="role.touched &&role.invalid" style="color: red;font-size: x-small;">Please enter
+                        the role</span>
                     </div>
                   </div>
 
@@ -30,26 +34,28 @@
                     <div class="form-outline flex-fill mb-0">
                       <input type="text" id="form3Example1c" name="name" class="form-control" placeholder="Name"
                         [(ngModel)]="userRegister.employeeName" #name="ngModel"
-                        [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required />
+                        [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required pattern="[A-Za-z]{1,32}" />
                       <!-- <label class="form-label" for="form3Example1c">Your Name</label> -->
+                      <!-- <label class="form-label" for="form3Example3">Name: &nbsp;</label> -->
+                      <span *ngIf="name.touched &&name.invalid" style="color: red;font-size: x-small;">Please enter
+                        the valid Name</span>
                       <div *ngIf="f.submitted && name.errors" class="invalid-feedback">
                         <div *ngIf="name.errors['required']">Name is required</div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" name="email" class="form-control"
-                        placeholder="Your Email Id" [(ngModel)]="userRegister.email" #email="ngModel"
-                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required
-                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
-                      <!-- <label class="form-label" for="form3Example3c">Your Email</label> -->
-                      <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
-                        <div *ngIf="email.errors['required']">Email is required</div>
-                        <div *ngIf="email.errors['pattern']">Enter Valied Email address</div>
-                      </div>
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form3Example3" name="email" class="form-control form-control-lg"
+                      placeholder="Enter a valid Email" [(ngModel)]="userRegister.email"
+                      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required />
+                    <!-- <label class="form-label" for="form3Example3">Email: &nbsp;</label> -->
+                    <span *ngIf="email.touched &&email.invalid" style="color: red;font-size: x-small;">Please enter
+                      the valid email</span>
+                    <div *ngIf="f.submitted && email.errors " class="invalid-feedback">
+                      <div *ngIf="email.errors['required']">Email is required</div>
+                      <div *ngIf="email.errors['pattern']">Enter valid email address</div>
                     </div>
                   </div>
 
@@ -60,12 +66,16 @@
                         placeholder="Your Mobile number" [(ngModel)]="userRegister.phone" #mobile="ngModel"
                         [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" required pattern="^[0-9]{10}$" />
                       <!-- <label class="form-label" for="form3Example3c">Your Email</label> -->
+                      <!-- <label class="form-label" for="form3Example3">Phone: &nbsp;</label> -->
+                      <span *ngIf="mobile.touched &&mobile.invalid" style="color: red;font-size: x-small;">Please enter
+                        the valid mobile number</span>
                       <div *ngIf="f.submitted && mobile.errors" class="invalid-feedback">
                         <div *ngIf="mobile.errors['required']">Mobile number is required</div>
-                        <div *ngIf="mobile.errors['pattern']">Enter Valied Mobile number</div>
+                        <div *ngIf="mobile.errors['pattern']">Enter valid mobile number</div>
                       </div>
                     </div>
                   </div>
+
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -74,9 +84,13 @@
                         [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required
                         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#$%^&*_]).{6,20}$" />
                       <!-- <label class="form-label" for="form3Example4c">Password</label> -->
+                      <!-- <label class="form-label" for="form3Example3">Password: &nbsp;</label> -->
+                      <span *ngIf="password.touched &&password.invalid" style="color: red;font-size: x-small;">Please
+                        enter
+                        the valid password</span>
                       <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
                         <div *ngIf="password.errors['required']">Password is required</div>
-                        <div *ngIf="password.errors['pattern']">Enter Valied Password </div>
+                        <div *ngIf="password.errors['pattern']">Enter valid password </div>
                       </div>
                     </div>
                   </div>
@@ -90,10 +104,14 @@
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
                   </div>
-
+                  
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                    <a type="submit" style="margin-right:40px;padding-top:10px" [routerLink]="['/log-in']" >Back To Login</a>
+                    <button type="submit" class="btn btn-primary btn-lg"  [disabled]="!f.valid"style="margin-right:120px;" >Register</button>
                   </div>
+                
+                    
+                  
 
                 </form>
 

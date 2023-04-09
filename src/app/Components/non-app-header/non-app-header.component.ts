@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeServiceService } from './Services/employee-service.service';
-import { LocalStorageService } from './Services/local-storage.service';
-import { ServerInformationService } from './Services/server-information.service';
+import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
+import { LocalStorageService } from 'src/app/Services/local-storage.service';
+import { ServerInformationService } from 'src/app/Services/server-information.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-non-app-header',
+  templateUrl: './non-app-header.component.html',
+  styleUrls: ['./non-app-header.component.css']
 })
-export class AppComponent {
-
+export class NonAppHeaderComponent {
   title = 'EmpPortal';
   isLoggedIn: boolean;
   name: string;
-  isadmin: string;
+  isAdmin: string;
   cartCount: number = 0;
   userId: number;
   searchItem: string;
@@ -25,28 +24,26 @@ export class AppComponent {
   serverTime: string;
 
 
-  constructor(private local: LocalStorageService, private empService: EmployeeServiceService, private router: Router, private serverInfo: ServerInformationService) {
-   
-    
-  }
-
-  ngOninit(){
+  constructor(private local: LocalStorageService,
+    private empService: EmployeeServiceService,
+    private router: Router,
+    private serverInfo: ServerInformationService) {
     this.getServerTime();
     this.userName = localStorage.getItem('userName');
-    this.isLoggedIn=this.IsLoggedInCheck();
   }
+
 
   IsLoggedInCheck(): boolean {
     if (this.local.isLoggedIn() == true) {
-      this.isLoggedIn=this.local.isLoggedIn() 
+      this.isLoggedIn = this.local.isLoggedIn()
       this.empService.GetAllEmployeeApiCall().subscribe(res => {
-        if (res != null || res.status == "Success") {
+        if (res) {
           this.Employees = res;
           this.status = res.status;
           this.message = res.message;
         }
       });
-      return false
+      return true
     } else {
       this.Logout();
       return false;
@@ -56,10 +53,16 @@ export class AppComponent {
 
   getServerTime() {
     this.serverInfo.GetServerTimeApiCall().subscribe(res => {
-      if(res!= null){
+      if (res) {
         this.serverTime = res.message;
-        this.local.setItem('serverTime',this.serverTime);
+        this.local.setItem('serverTime', this.serverTime);
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
 
@@ -68,8 +71,7 @@ export class AppComponent {
     this.router.navigateByUrl('/log-in');
   }
 
-  forGotPassword(){
+  forGotPassword() {
     this.router.navigateByUrl('/forgot-password')
   }
-  
 }

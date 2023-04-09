@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
 import { CountryResponse } from 'src/app/Models/country-response';
 import { EmployeeAddRequest } from 'src/app/Models/employee-add-request';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
@@ -22,17 +24,26 @@ export class CreateEmployeeComponent {
   constructor(private empService: EmployeeServiceService,
     private router: Router,
     private localStorage: LocalStorageService,
-    private serverInfo: ServerInformationService) {
+    private serverInfo: ServerInformationService,
+   ) {
     this.getAllCountries();
   }
 
   getAllCountries() {
     this.empService.GetAllCountriesApiCall().subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.countries = res;
       }
+    }, error => {
+      console.log(error);
+      this.serverInfo.showErrorMessage('Error',
+        error.error.message,
+        'error',
+        false,)
+      this.router.navigateByUrl('/dashboard');
     });
   }
+
   selectCountry(value: string): void {
 
     this.employeeAddRequest.countryName = value;
@@ -56,14 +67,15 @@ export class CreateEmployeeComponent {
           this.serverInfo.showSuccessMessage('Profile Created',
             this.message,
             'success',
-            true,)
+            false,)
           this.router.navigateByUrl('/dashboard');
         }
-      }, e => {
+      }, error => {
+        console.log(error);
         this.serverInfo.showErrorMessage('Error',
-          e.error.message,
+          error.error.message,
           'error',
-          true,)
+          false,)
         this.router.navigateByUrl('/dashboard');
       });
     }

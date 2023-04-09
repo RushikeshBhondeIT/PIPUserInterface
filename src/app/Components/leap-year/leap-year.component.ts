@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'jquery';
+import { LeapYearDayResponse } from 'src/app/Models/leap-year-day-response';
 import { EmployeeServiceService } from 'src/app/Services/employee-service.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { ServerInformationService } from 'src/app/Services/server-information.service';
@@ -13,7 +15,7 @@ import { ServerInformationService } from 'src/app/Services/server-information.se
 export class LeapYearComponent {
   searchText: string;
   leapYearsResponse: [] = [];
-  leapYearsWithDayResponse: [] = [];
+  leapYearsWithDayResponse: LeapYearDayResponse[] = [];
   message: string = ""
   status: string = ""
   searchItem: Date;
@@ -21,7 +23,7 @@ export class LeapYearComponent {
   endYear: number;
   startDate: Date;
   endDate: Date;
-
+  errMessage: any;
 
   constructor(private empService: EmployeeServiceService,
     private localStorage: LocalStorageService,
@@ -31,24 +33,33 @@ export class LeapYearComponent {
   }
 
   leapYearWithDay() {
+    var someDateVar = this.datepipe.transform(this.searchItem, 'MM-dd-YYYY');
     this.serverInfo.GetLeapYearsDayApiCall(this.startDate, this.endDate).subscribe(res => {
-      if (res != null) {
-
-        let data = res;
-        let projectNames = data.map(item => {
-          this.leapYearsWithDayResponse = item
-        });
+      if (res) {
+        this.leapYearsWithDayResponse = res;
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('error',
+        error.error.message,
+        'error',
+        false,)
     });
   }
 
 
   LeapYear() {
-    alert('method called');
     this.serverInfo.GetLeapYearsApiCall(this.startYear, this.endYear).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.leapYearsResponse = res
       }
+    }, error => {
+      console.log(error.message);
+      this.serverInfo.showErrorMessage('Error',
+        this.errMessage = error.error.message + ' ' + ', Something went wrong!',
+        'error',
+        false,)
+      this.router.navigateByUrl('/dashboard');
     });
   }
 
@@ -56,14 +67,15 @@ export class LeapYearComponent {
   GetDay() {
     var someDateVar = this.datepipe.transform(this.searchItem, 'MM-dd-YYYY');
     this.serverInfo.GetDayTimeApiCall(someDateVar).subscribe(res => {
-      if (res != null) {
+      if (res) {
         this.message = res.message;
       }
-    }, e => {
+    }, error => {
+      console.log(error.message);
       this.serverInfo.showErrorMessage('Error',
         'DateTime is null !',
         'error',
-        true,)
+        false,)
       this.router.navigateByUrl('/dashboard');
     });
   }
