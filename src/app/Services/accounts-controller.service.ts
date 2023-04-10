@@ -54,7 +54,7 @@ export class AccountsControllerService {
   }
 
   GetUserDetailApiCall(email: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl+"UserDetail?email=", email);
+    return this.http.get<any>(this.baseUrl + "UserDetail?email="+ email);
   }
 
 }

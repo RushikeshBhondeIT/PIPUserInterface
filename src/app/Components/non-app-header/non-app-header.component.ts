@@ -33,23 +33,23 @@ export class NonAppHeaderComponent {
   }
 
 
-  IsLoggedInCheck(): boolean {
-    if (this.local.isLoggedIn() == true) {
-      this.isLoggedIn = this.local.isLoggedIn()
-      this.empService.GetAllEmployeeApiCall().subscribe(res => {
-        if (res) {
-          this.Employees = res;
-          this.status = res.status;
-          this.message = res.message;
-        }
-      });
-      return true
-    } else {
-      this.Logout();
-      return false;
-    }
+  // IsLoggedInCheck(): boolean {
+  //   if (this.local.isLoggedIn() == true) {
+  //     this.isLoggedIn = this.local.isLoggedIn()
+  //     this.empService.GetAllEmployeeApiCall().subscribe(res => {
+  //       if (res) {
+  //         this.Employees = res;
+  //         this.status = res.status;
+  //         this.message = res.message;
+  //       }
+  //     });
+  //     return true
+  //   } else {
+  //     this.Logout();
+  //     return false;
+  //   }
 
-  }
+  // }
 
   getServerTime() {
     this.serverInfo.GetServerTimeApiCall().subscribe(res => {

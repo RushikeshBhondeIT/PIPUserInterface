@@ -6,19 +6,6 @@
     crossorigin="anonymous"></script>
 <app-header></app-header>
 <div class="container-fluid dashboard-banner">
-    <!-- <div class="column">
-        <div class="row">
-            <div class="column">
-                <input class="form-control" type="date" aria-label="Search" [(ngModel)]="this.searchItem"
-                    style="width: 150px;">
-            </div>
-            <div class="column" style="width:100px">
-                <a class="btn btn-danger" id="getDayBtn" (click)="GetDay()">GetDay</a>
-            </div>
-            <div class="column"><input class="form-control" id="getdayOut" type="text" placeholder=""
-                    aria-label="Search" [(ngModel)]="this.message"></div>
-        </div>
-    </div> -->
 
 
     <div class="row">
@@ -89,7 +76,7 @@
                             <td>{{item.age}}</td>
                             <td>
                                 <a class="btn btn-primary" (click)="Editinvoice(item)">Edit</a> |
-                                <a class="btn btn-danger" (click)="DeleteEmployee(item)">Delete</a> |
+                                <a class="btn btn-danger" (click)="DeleteEmployee(item)">Delete</a> 
                             </td>
                         </tr>
                     </tbody>

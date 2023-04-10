@@ -5,39 +5,45 @@ import { RegisterUser } from '../Models/register-user.model';
 import { AddCountry } from '../Models/add-country';
 import { EmployeeAddRequest } from '../Models/employee-add-request';
 import { EmployeeResponse } from '../Models/employee-response';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeServiceService {
+  
+  baseUrl=environment.empUrl;
   header: HttpHeaders = new HttpHeaders();
   constructor(private http: HttpClient) {
   }
+ // GetUserDetailApiCall(email: string): Observable<any> {
+  //   return this.http.post<any>(this.baseUrl+"UserDetail?email=", email);
+  // }
 
   AddCountryApiCall(countryName:AddCountry): Observable<any> {
-    return this.http.post<any>("https://localhost:7115/AddCountries",countryName);
+    return this.http.post<any>(this.baseUrl+"AddCountries",countryName);
   }
 
   GetAllCountriesApiCall(): Observable<any> {
-    return this.http.get<any>("https://localhost:7115/GetAllCountries").pipe(
+    return this.http.get<any>(this.baseUrl+"GetAllCountries").pipe(
       catchError(this.handleError)
     );
   }
 
   GetAllEmployeeApiCall(): Observable<any> {
-    return this.http.get<any>("https://localhost:7115/GetAllEmployees");
+    return this.http.get<any>(this.baseUrl+"GetAllEmployees");
   }
 
   CreateEmployeeApiCall(employeeAddRequest:EmployeeAddRequest): Observable<any> {
-    return this.http.post<any>("https://localhost:7115/Create",employeeAddRequest);
+    return this.http.post<any>(this.baseUrl+"Create",employeeAddRequest);
   }
   EditEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
     console.log(employeeAddRequest);
-    return this.http.put<any>("https://localhost:7115/Edit",employeeAddRequest);
+    return this.http.put<any>(this.baseUrl+"Edit",employeeAddRequest);
   }
 
   DeleteEmployeeApiCall(employeeAddRequest:EmployeeResponse): Observable<any> {
-    return this.http.post<any>("https://localhost:7115/Delete",employeeAddRequest);
+    return this.http.post<any>(this.baseUrl+"Delete",employeeAddRequest);
   }
 
 

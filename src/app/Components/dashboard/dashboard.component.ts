@@ -57,18 +57,16 @@ export class DashboardComponent implements OnInit {
   }
 
   GetAllEmployee() {
-    if (this.localStorage.isLoggedIn() == true) {
-      this.empService.GetAllEmployeeApiCall().subscribe(res => {
-        if (res != null || res.status == "Success") {
-          this.employees = res
-          this.status = res.status;
-          this.message = res.message;
-        }
-      }, (error) => {
-        this.errorMessage = error.message + ' ' + ', Something went wrong!';
-        console.log(this.errorMessage);
-      });
-    }
+    this.empService.GetAllEmployeeApiCall().subscribe(res => {
+      if (res) {
+        this.employees = res
+        this.status = res.status;
+        this.message = res.message;
+      }
+    }, (error) => {
+      this.errorMessage = error.message + ' ' + ', Something went wrong!';
+      console.log(this.errorMessage);
+    });
     return this.employees;
   }
 
@@ -88,7 +86,7 @@ export class DashboardComponent implements OnInit {
     if (this.localStorage.isLoggedIn() == true) {
       this.empService.DeleteEmployeeApiCall(employee).subscribe(res => {
         this.message = res.message;
-        if (res != null) {
+        if (res) {
           this.serverInfo.showSuccessMessage('Profile Deleted',
             this.message,
             'success',
