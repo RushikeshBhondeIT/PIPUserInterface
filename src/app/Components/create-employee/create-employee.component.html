@@ -70,7 +70,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -104,16 +104,6 @@
                     </div>
                   </div>
 
-                  <!-- <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <select #teams (change)="NewsLetterSelected(teams.value)" style="width:390px;height: 35px;">
-                        <option>true</option>
-                        <option>false</option>
-                      </select>
-                    </div>
-                  </div> -->
-
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -132,10 +122,9 @@
                       </div>
                     </div>
                   </div>
-
-
-
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <a type="submit" style="margin-right:40px;padding-top:10px"
+                                            [routerLink]="['/dashboard']">Back</a>
                     <button type="submit" class="btn btn-primary btn-lg" [disabled]="!f.valid">Create Employee
                       Profile</button>
                   </div>

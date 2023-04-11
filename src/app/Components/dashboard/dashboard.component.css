@@ -76,11 +76,3 @@ td:last-child {
 	position: sticky;
 	top: 0px;
 }
-
-.t-body {
-	/* position:relative;
-   width:100%; */
-	/* display: block;
-   overflow-y: scroll; */
-	/* height: 500px; */
-}

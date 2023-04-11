@@ -59,7 +59,7 @@ export class EmployeeServiceService {
       console.error(
         errorMessage= `Backend returned code ${error.status}, body was: `, error.message);
         
-
+        
     }
     // Return an observable with a user-facing error message.
     errorMessage+=  'Something bad happened; please try again later.';
